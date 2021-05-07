@@ -25,13 +25,13 @@ module.exports = {
   productionSourceMap: false,
   devServer: {
     proxy: {
-      "/_api": {
-        target: "http://192.168.10.148:31181/",
-        // target: "http://192.168.10.148:8082/",
-        pathRewrite: { "^/_api": "" },
-        changeOrigin: true,
-        // ws: true //代理websockes
-      }
+      // "/_api": {
+      //   target: "http://192.168.10.148:31181/",
+      //   // target: "http://192.168.10.148:8082/",
+      //   pathRewrite: { "^/_api": "" },
+      //   changeOrigin: true,
+      //   // ws: true //代理websockes
+      // }
     },
     port: port,
     open: true,

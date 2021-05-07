@@ -1,7 +1,7 @@
 <style lang="scss" scoped>
-$bg:#1f2235;
-$dark_gray:#889aa4;
-$light_gray:#eee;
+$bg:#fff;
+$dark_gray:transparent;
+$light_gray:#000;
 
 .login-container {
   min-height: 100%;
@@ -11,7 +11,7 @@ $light_gray:#eee;
   .login-form {
     position: relative;
     max-width: 100%;
-    padding: 0 35px 65px;
+    padding: 16px 35px 65px;
     margin: 0 auto;
     overflow: hidden;
 
@@ -21,37 +21,13 @@ opacity: 1;
 background: #ffffff;
 border-radius: 20px;
   }
-  .tips {
-    font-size: 14px;
-    color: #fff;
-    margin-bottom: 10px;
-
-    span {
-      &:first-of-type {
-        margin-right: 16px;
-      }
-    }
-  }
-  .svg-container {
-    padding: 6px 5px 6px 15px;
-    color: $dark_gray;
-    vertical-align: middle;
-    width: 30px;
-    display: inline-block;
-  }
   .title-container {
     position: relative;
-    width: 440px;
-    background: #323a4f;
-    padding: 10px 0;
-    left: -35px;
     margin-bottom:50px;
     .title {
-      font-size: 28px;
-    color: #f8f6ff;
+      font-size: 24px;
+    // color: #000;
     text-align: center;
-    font-family: cursive;
-    font-weight: bold;
     }
     .set-language {
       color: #fff;
@@ -77,11 +53,6 @@ border-radius: 20px;
     right: 0;
     bottom: 6px;
   }
-  @media only screen and (max-width: 470px) {
-    .thirdparty-button {
-      display: none;
-    }
-  }
 }
 .container_tit {
   background: #002766;
@@ -91,6 +62,7 @@ border-radius: 20px;
   img { 
     width: 115px; 
     margin-left: 75px;
+    height: 44px;margin-top: 10px;
   }
   span {
     color: #aa92ff;
@@ -100,7 +72,7 @@ border-radius: 20px;
   }
 }
 .base {
-  background: #23293f;
+  // background: #23293f;
   color: #ccc;
   width: 100%;
   line-height: 30px;
@@ -120,9 +92,7 @@ border-radius: 20px;
     margin-right: 280px;
   }
 }
-.login-form ::v-deep .el-form-item--medium .el-form-item__content {
-  background: #202334!important;
-}
+
 ::v-deep .el-form-item--medium {
   margin-bottom: 30px;
 }
@@ -132,36 +102,36 @@ border-radius: 20px;
 }
 </style>
 <style lang="scss">
-.login-container {
-  .el-checkbox__label {
-  color: #C0C4CC;
-}
-.el-checkbox__inner {
-  background: #C0C4CC;
-}
-.el-checkbox__input.is-checked + .el-checkbox__label {
-  color: #b973ff;
-}
-.el-checkbox__input.is-checked .el-checkbox__inner {
-  background: #b973ff;
-  border-color: #b973ff;
-}
-}
-.forget {
-    color: #b973ff;
-  font-size: 14px;
-  cursor: pointer;
-  display: block;
-}
-.verifyCode_btn {
-  width: 126px;
-  height: 40px;
-    letter-spacing: 1px;
+// .login-container {
+//   .el-checkbox__label {
+//   color: #C0C4CC;
+// }
+// .el-checkbox__inner {
+//   background: #C0C4CC;
+// }
+// .el-checkbox__input.is-checked + .el-checkbox__label {
+//   color: #b973ff;
+// }
+// .el-checkbox__input.is-checked .el-checkbox__inner {
+//   background: #b973ff;
+//   border-color: #b973ff;
+// }
+// }
+// .forget {
+//     color: #b973ff;
+//   font-size: 14px;
+//   cursor: pointer;
+//   display: block;
+// }
+// .verifyCode_btn {
+//   width: 126px;
+//   height: 40px;
+//     letter-spacing: 1px;
 
-}
-.verify {
-  width: 232px;
-}
+// }
+// .verify {
+//   width: 232px;
+// }
 </style>
 
 <template>
@@ -173,7 +143,19 @@ border-radius: 20px;
        <div>
 
     <el-form ref="loginForm" v-if="loginShow" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
-      <div class="title-container"><h3 class="title">人脸辨识云·门禁系统</h3></div>
+      <div class="title-container"><h3 class="title">辨识云登录</h3></div>
+
+<div class="admin">
+       <el-form-item>
+         <el-radio v-model="radio" label="1">根用户</el-radio>
+       <p>执行需要无限制访问权限的任务的账户拥有者。<span>了解更多</span></span></p>
+     </el-form-item>
+
+      <el-form-item>
+         <el-radio v-model="radio" label="2">根用户</el-radio>
+       <p>执行需要无限制访问权限的任务的账户拥有者。</p>
+     </el-form-item>
+</div>
       <el-form-item prop="username"><span class="svg-container"><svg-icon icon-class="user" /></span><el-input ref="username" v-model.trim="loginForm.username" placeholder="用户名" name="username" type="text" clearable /></el-form-item>
       <el-form-item prop="password">
           <span class="svg-container"><svg-icon icon-class="password" /></span>
@@ -238,6 +220,7 @@ export default {
     }
     function notNull(notNullName) { return [{required: true, message: `请输入${ notNullName }`, trigger: "blur" }] }
     return {
+      radio: '1',
       loginShow: true,
       findPassShow: false,
       checked: false,
@@ -465,44 +448,4 @@ export default {
   },
 }
 </script>
-<style lang="scss">
-$bg:#283443;
-$light_gray:#fff;
-$cursor: #fff;
-
-@supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
-  .login-container .el-input input {
-    color: $cursor;
-  }
-}
-/* 重置element-ui css */
-.login-container {
-  .el-input {
-    display: inline-block;
-    height: 47px;
-    width: 85%;
-
-    input {
-      background: transparent;
-      border: 0px;
-      -webkit-appearance: none;
-      border-radius: 0px;
-      padding: 12px 5px 12px 15px;
-      color: $light_gray;
-      height: 47px;
-      caret-color: $cursor;
-
-      &:-webkit-autofill {
-        box-shadow: 0 0 0px 1000px $bg inset !important;
-        -webkit-text-fill-color: $cursor !important;
-      }
-    }
-  }
-  .el-form-item {
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    color: #454545;
-  }
-}
-</style>
+ 
