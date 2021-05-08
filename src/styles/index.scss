@@ -16,7 +16,7 @@ body {
 }
 
 label {
-  font-weight: 700;
+  // font-weight: 700;
 }
 h1,h2,h3,h4{font-weight: normal;}
 
@@ -249,10 +249,10 @@ border-radius: 50%;
 // 状态查询下拉样式
 .statusStyle {
   label, input,.el-select__caret {
-    color: #a145ff!important;
+    color: #409EFF!important;
   }
   input {
-    border-color: #a145ff;
+    border-color: #409EFF;
   }
 }
 
@@ -260,7 +260,7 @@ border-radius: 50%;
   margin-bottom: 20px;
   i {
     display: inline-block;
-    background: #8a16ff;
+    background: #409EFF;
     height: 16px;
     width: 3px;
     margin-right: 6px;
@@ -277,7 +277,7 @@ border-radius: 50%;
 
 // 设置进度条色值
 #nprogress .bar {
-  background: #8a16ff !important;
+  background: #409EFF !important;
  }
 
  // 更改svg字体

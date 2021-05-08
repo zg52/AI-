@@ -1,32 +1,27 @@
 <style lang="scss" scoped>
-$bg:#fff;
-$dark_gray:transparent;
-$light_gray:#000;
 
 .login-container {
   min-height: 100%;
   width: 100%;
-  // background-color: $bg;
   overflow: hidden;
   .login-form {
     position: relative;
     max-width: 100%;
-    padding: 16px 35px 65px;
     margin: 0 auto;
     overflow: hidden;
 
-    width: 350px;
-height: 706px;
 opacity: 1;
 background: #ffffff;
 border-radius: 20px;
+  }
+  .con {
+    padding: 16px 40px 40px 40px;
   }
   .title-container {
     position: relative;
     margin-bottom:50px;
     .title {
       font-size: 24px;
-    // color: #000;
     text-align: center;
     }
     .set-language {
@@ -43,7 +38,6 @@ border-radius: 20px;
     right: 10px;
     top: 7px;
     font-size: 16px;
-    color: $dark_gray;
     cursor: pointer;
     user-select: none;
   }
@@ -54,6 +48,7 @@ border-radius: 20px;
     bottom: 6px;
   }
 }
+
 .container_tit {
   background: #002766;
   height: 64px;
@@ -72,7 +67,6 @@ border-radius: 20px;
   }
 }
 .base {
-  // background: #23293f;
   color: #ccc;
   width: 100%;
   line-height: 30px;
@@ -86,7 +80,7 @@ border-radius: 20px;
 .main {
   display: flex;
   justify-content: center;
-  padding-top: 60px;
+  padding-top: 20px;
   align-items: center;
   .banner {
     margin-right: 280px;
@@ -98,71 +92,168 @@ border-radius: 20px;
 }
 .handle_login {
   width:100%;margin-top: 20px;
-  padding: 12px 0!important;font-size: 20px!important;font-family: cursive!important;font-weight: bold;
+  padding: 15px 0!important;font-size: 16px!important;
 }
-</style>
-<style lang="scss">
-// .login-container {
-//   .el-checkbox__label {
-//   color: #C0C4CC;
-// }
-// .el-checkbox__inner {
-//   background: #C0C4CC;
-// }
-// .el-checkbox__input.is-checked + .el-checkbox__label {
-//   color: #b973ff;
-// }
-// .el-checkbox__input.is-checked .el-checkbox__inner {
-//   background: #b973ff;
-//   border-color: #b973ff;
-// }
-// }
-// .forget {
-//     color: #b973ff;
-//   font-size: 14px;
-//   cursor: pointer;
-//   display: block;
-// }
-// .verifyCode_btn {
-//   width: 126px;
-//   height: 40px;
-//     letter-spacing: 1px;
+// 
 
-// }
-// .verify {
-//   width: 232px;
-// }
+.admin p {
+color: #999;
+font-size: 12px;
+padding-left: 26px;
+span {
+  cursor: pointer;
+  color: #409EFF;
+}
+}
+.admin {
+  ::v-deep {
+    .el-form-item__content {line-height: inherit!important;}
+    .el-form-item--medium .el-form-item__content {
+      padding: 12px;
+      padding-bottom:0;
+      cursor: pointer;
+    }
+    .el-form-item--medium {
+      margin-bottom: 15px;
+    }
+    
+  }
+  ::v-deep .active {
+      background: #E6F7FF!important;
+      border:1px #1890FF solid;
+      box-sizing: border-box;
+      border-radius: 8px;
+
+    }
+    ::v-deep .el-radio__label {
+      font-size: 16px;
+    }
+}
+.loginBox {
+  .t {
+    display: inline-block;
+      height: 1px;
+      background: #dcdfe6;
+      width: 100%;
+      vertical-align: middle;
+  }
+  .svg-icon {
+    fill: #999;
+  }
+}
+
+  .svg-container {
+    padding: 6px 5px 6px 15px;
+    vertical-align: middle;
+    width: 30px;
+    display: inline-block;
+  }
+  .forget {
+    color: #999;
+  font-size: 14px;
+  cursor: pointer;
+  display: block;
+  &:hover {
+    color: #409EFF;
+  }
+}
+.wei {
+  color: #999;
+  padding-top: 14px;
+  text-align: center;
+}
+.creatRoot {
+  width: 100%;
+  padding: 14px 0;
+  font-size: 16px;
+}
+.agreeChecked {
+  padding-top:10px;
+}
+.agreeChecked + span {
+    color: #999!important;
+    font-size: 14px;
+    padding-left: 8px;
+    cursor: pointer;
+}
+.loginTab {
+display: flex;
+justify-content: center;
+border:1px #dcdfe6 solid;
+width: 300px;
+margin: 0 auto;
+margin-bottom:20px;
+margin-top: 20px;
+box-sizing: border-box;
+span {
+  display: block;
+  width: 150px;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+cursor: pointer;
+}
+span.active {
+  color: #fff;
+  background: #409EFF;
+}
+span:last-child {
+  cursor: not-allowed;
+}
+}
+.reg {
+::v-deep.el-dialog__title {
+  color: #333;
+  font-size: 26px;
+  padding-top:40px;
+  display: block;
+  display: none;
+}
+::v-deep.el-dialog.is-fullscreen {
+  // margin-top:60px;
+  // background: #f8f8f8;
+}
+::v-deep.el-dialog__wrapper {
+  overflow-y: hidden;
+}
+ 
+}
 </style>
 
 <template>
   <div class="login-container">
     <div class="container_tit"><img src="../../assets/image/home-logo.png"></div>
-    <div class="main"><div class="banner">
-       <!-- <img src="../../assets/image/banner.png" width="490"> -->
+
+<div class="main" v-show="loginBox">
+      <div class="banner">
+       <img src="../../assets/image/banner.png" width="657">
        </div>
        <div>
 
-    <el-form ref="loginForm" v-if="loginShow" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
+<el-form ref="loginForm" v-if="loginShow" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
+      <div class="con">
       <div class="title-container"><h3 class="title">辨识云登录</h3></div>
 
 <div class="admin">
-       <el-form-item>
-         <el-radio v-model="radio" label="1">根用户</el-radio>
-       <p>执行需要无限制访问权限的任务的账户拥有者。<span>了解更多</span></span></p>
-     </el-form-item>
-
-      <el-form-item>
-         <el-radio v-model="radio" label="2">根用户</el-radio>
-       <p>执行需要无限制访问权限的任务的账户拥有者。</p>
-     </el-form-item>
+       <el-form-item :class="{active: active0}" @click.native="rootBox"> <el-radio v-model="radio" label="1">根用户</el-radio> <p>执行需要无限制访问权限的任务的账户拥有者。<span @click="info">了解更多</span></p> </el-form-item>
+      <el-form-item :class="{active: active1}" @click.native="iamBox"> <el-radio v-model="radio" label="2">IAM用户</el-radio> <p>在账户中执行日常任务的用户。<span @click="info">了解更多</span></p> </el-form-item>
 </div>
-      <el-form-item prop="username"><span class="svg-container"><svg-icon icon-class="user" /></span><el-input ref="username" v-model.trim="loginForm.username" placeholder="用户名" name="username" type="text" clearable /></el-form-item>
-      <el-form-item prop="password">
-          <span class="svg-container"><svg-icon icon-class="password" /></span>
-          <el-input ref="password" v-model.trim="loginForm.password" placeholder="密码" type="password" clearable />
-        </el-form-item>
-       <div class="flex flexbetween"><el-checkbox v-model.trim="checked">记住密码</el-checkbox><span class="forget" @click="loginShowHandle">忘记密码？</span></div>
+
+<div class="loginBox">
+<p class="t"></p>
+     <div class="loginTab">
+       <span class="active">账户密码登录</span>
+       <span>短信登录</span>
+     </div>
+      <el-form-item prop="username"><span class="svg-container"><svg-icon icon-class="user" /></span><el-input ref="username" v-model.trim="loginForm.username" placeholder="请输入用户名/手机号/邮箱" name="username" type="text" clearable /></el-form-item>
+      <el-form-item prop="password"> <span class="svg-container"><svg-icon icon-class="password" /></span> <el-input ref="password" v-model.trim="loginForm.password" placeholder="请输入密码" type="password" clearable /> </el-form-item>
+       <div class="flex flexbetween"><el-checkbox v-model.trim="checked">记住我</el-checkbox><span class="forget" @click="loginShowHandle">忘记密码？</span></div>
       <el-button class="handle_login" :loading="loading" type="primary" @click.native.prevent="handleLogin">登录</el-button>
+      <p class="wei">还未注册？</p>
+      <el-button type="primary" class="creatRoot" plain @click="creatRootHandle">创建根账户</el-button>
+       <el-checkbox v-model.trim="agreeChecked" class="agreeChecked"></el-checkbox><span @click="agreeHandle">阅读并同意《服务条款》《法律声明》《隐私政策》</span>
+</div>
+      </div>
     </el-form>
     
 <!-- ###########找回密码 ##########--> 
@@ -183,16 +274,42 @@ border-radius: 20px;
     </el-form>
    </div>
   </div>
+
+  <Reg v-show="regShow" @regHide_loginShow="regHide_loginShow"/>
+
+<!-- 服务条款 -->
+  <el-dialog
+    title="用户服务条款 / 法律声明 / 隐私政策"
+    :visible.sync="dialogVisible"
+    width="60%"
+    top="0"
+    >
+    <div>
+      <privacy />
+    </div>
+    <div slot="footer">
+      <el-button @click="dialogVisible = false">取 消</el-button>
+      <el-button type="primary" @click="agreeChecked = true, dialogVisible = false">确 定</el-button>
+    </div>
+  </el-dialog>
     <footer class="base">{{ `版权信息： CopyRight © 2016-${ new Date().getFullYear() } 华捷艾米 版权所有 京ICP备18040828号-1` }}</footer>
+
   </div>
 </template>
 <script>
 
 import Cookies from 'js-cookie'
 import { getVerifyCode, findPass } from "@/api/user"
+import privacy from '@/views/privacy/privacy'
+import Reg from '@/views/login/components/Reg'
 import md5 from 'js-md5'
+import { filterAsyncRoutes } from '@/store/modules/permission'
 
 export default {
+  components: {
+    privacy,
+    Reg
+  },
   name: 'login',
   data() {
   let validatePsw1 = (rule, value, callback) => {
@@ -220,7 +337,15 @@ export default {
     }
     function notNull(notNullName) { return [{required: true, message: `请输入${ notNullName }`, trigger: "blur" }] }
     return {
-      radio: '1',
+      loginBox: false,
+      regShow: true,
+      radio: '2',
+      active0: false,
+      active1: true,
+      agreeChecked: true,
+      dialogVisible: false,
+      regDialog: true,
+
       loginShow: true,
       findPassShow: false,
       checked: false,
@@ -286,6 +411,28 @@ export default {
     }
   },
   methods: {
+    regHide_loginShow() {
+      this.regShow = false, this.loginBox = true
+    },
+    creatRootHandle() {
+      this.regShow = true, this.loginBox = false
+    },
+    rootBox() {
+      this.radio = '1'
+      this.active0 = true
+      this.active1 = false
+    },
+    iamBox() {
+      this.radio = '2'
+      this.active0 = false
+      this.active1 = true
+    },
+    agreeHandle() {
+      this.dialogVisible = true
+    },
+    info() {
+      // alert(0)
+    },
     checkCapslock(e) {
       const { key } = e
       this.capsTooltip = key && key.length === 1 && (key >= 'A' && key <= 'Z')
@@ -296,15 +443,13 @@ export default {
       } else {
         this.passwordType = 'password'
       }
-      // this.$nextTick(() => {
-      //   this.$refs.password.focus()
-      // })
     },
     handleLogin() {
       let user = this.loginForm
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          this.loading = true
+         if(this.agreeChecked) {
+            this.loading = true
           this.$store.dispatch('user/login',user).then(() => {
            if(this.checked) {
               Cookies.set('username',user['username'], {expires: 10})
@@ -319,6 +464,9 @@ export default {
             }).catch(() => {
               this.loading = false
             })
+         } else {
+           this.$message('请阅读并同意《服务条款》《法律声明》《隐私政策》', 4000)
+         }
         } else {
           return false
         }
@@ -448,4 +596,31 @@ export default {
   },
 }
 </script>
- 
+  <style lang="scss">
+
+.loginBox {
+    .el-input {
+    display: inline-block;
+    width: 85%;
+
+    input {
+      background: transparent;
+      border: 0px;
+      -webkit-appearance: none;
+      border-radius: 0px;
+      color: #333;
+      caret-color: #333;
+
+      &:-webkit-autofill {
+        box-shadow: 0 0 0px 1000px #fff inset !important;
+        -webkit-text-fill-color: #333 !important;
+      }
+    }
+  }
+    .el-form-item {
+    border-radius: 5px;
+    color: #454545;
+    border:1px #dcdfe6 solid;
+  }
+}
+</style>
