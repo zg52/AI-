@@ -31,11 +31,11 @@ const mutations = {
 }
 
 const actions = {
-  // 登录
+// 登录
   login({ commit }, userInfo) {
-    const { username, password } = userInfo
+    const {type, username, password } = userInfo
     return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: md5(password).toUpperCase() }).then(response => {
+      login({tppe: type.trim(), username: username.trim(), password: md5(password).toUpperCase() }).then(response => {
         const {code, msg, data } = response
         if(code === 0) {
           commit('SET_TOKEN', data.token)

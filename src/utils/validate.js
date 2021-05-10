@@ -120,3 +120,25 @@ export function validateIdCard(idCard){
 export function validateChinese(str){
   return /[^\w]/.test(str) ? true : false
 }
+
+
+/**
+ * @param {string} str 
+ * @returns {Boolean}
+ * @description 输入12~18位数字、字母和符号组合的密码
+ */
+export function validatePass(str) {
+  return /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+`\-={}:";'<>?,.\/]).{12,18}$/.test(str)
+}
+
+/**
+ * @param {string} str 
+ * @returns {Boolean}
+ * @description 输入4~12位数字和字母组合的密码
+ */
+ export function validateRegName(str) {
+  return /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{4,20}$/.test(str)
+}
+
+
+
