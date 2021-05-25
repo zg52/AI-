@@ -84,7 +84,7 @@
 }
 .el-pagination {
   margin-top: 30px;
-  justify-content: center;
+  justify-content: flex-end;
   display: flex;
 }
 .el-form--inline .el-form-item {
@@ -102,4 +102,18 @@
 }
 .el-icon-info {
   color: #999;
+}
+.el-page-header__left:hover .el-icon-back,.el-page-header__left:hover .el-page-header__title {
+  color: #409EFF!important;
+
+}
+.el-table th {background: #fafafa;font-weight: normal;}
+.el-form-item__label, .el-table th, .is-plain {
+  color: #000;
+}
+.el-table th {height: 57px;}
+.el-table__body .el-table__row td {padding: 16px 0;}
+.el-table td {border-bottom:1px #f3f3f3 solid;}
+.el-dropdown-menu__item {
+  // color: #1890ff!important;
 }

@@ -46,14 +46,14 @@ export default {
     title: {
         text: '设备在线/离线/故障实时监控',
         textStyle: {
-          color: '#8a16ff',
+          color: '#409eff',
           fontSize: 14
         }
     },
     textStyle: {
-      color: '#8a16ff'
+      color: '#409eff'
     },
-    color:['#8a16ff','#b572f9', '#dec9f3'],
+    color:['#409eff','#b572f9', '#dec9f3'],
     tooltip: {
         trigger: 'axis'
     },
@@ -68,7 +68,7 @@ export default {
               readOnly: false,
                emphasis: {
                  iconStyle: {
-                   borderColor: '#8a16ff'
+                   borderColor: '#409eff'
                  }
                }
                },
@@ -77,7 +77,7 @@ export default {
              type: ['line', 'bar', 'red'],
               emphasis: {
                  iconStyle: {
-                   borderColor: '#8a16ff'
+                   borderColor: '#409eff'
                  }
                }
              },
@@ -85,7 +85,7 @@ export default {
               show: true,
                emphasis: {
                  iconStyle: {
-                   borderColor: '#8a16ff'
+                   borderColor: '#409eff'
                  }
                }
             },
@@ -93,7 +93,7 @@ export default {
               show: true,
                emphasis: {
                  iconStyle: {
-                   borderColor: '#8a16ff'
+                   borderColor: '#409eff'
                  }
                }
             }
@@ -110,7 +110,7 @@ export default {
             data: this.xValue,
             axisLine: {
             lineStyle: {
-            color: '#8a16ff' ,
+            color: '#409eff' ,
             }
         },
         axisPointer: {
@@ -126,7 +126,7 @@ export default {
             minInterval: 1,
             axisLine: {
             lineStyle: {
-            color: '#8a16ff' ,
+            color: '#409eff' ,
             }
        },
         }
@@ -203,25 +203,25 @@ export default {
      
   },
   mounted() {
-  this.$nextTick(() => {
-  this.initChart()
-  this.onSearch()
-  setInterval(() => {
-     this.onSearch()
-     xuanfu()
-      },60_000)
+//   this.$nextTick(() => {
+//   this.initChart()
+//   this.onSearch()
+//   setInterval(() => {
+//      this.onSearch()
+//      xuanfu()
+//       },60_000)
 
-xuanfu()
-function xuanfu() {
-    setTimeout(() => {
-      vm.chart.dispatchAction({
-      type: 'showTip',
-      seriesIndex: 0 ,
-      dataIndex: 0,
-      });
-   },1000)
-}
-  })
+// xuanfu()
+// function xuanfu() {
+//     setTimeout(() => {
+//       vm.chart.dispatchAction({
+//       type: 'showTip',
+//       seriesIndex: 0 ,
+//       dataIndex: 0,
+//       });
+//    },1000)
+// }
+//   })
   },
   beforeDestroy() {
     if (!this.chart) {

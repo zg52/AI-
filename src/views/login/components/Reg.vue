@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-08 15:49:00
- * @LastEditTime: 2021-05-10 18:11:26
+ * @LastEditTime: 2021-05-11 11:17:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \inventory-apie:\hjimi\人脸辨识云\html\gitee\pc\faceCloudWebsite\src\views\login\reg.vue
@@ -174,9 +174,9 @@ export default {
             },
         regSuccessShow: false,
         regShow: true
-        },
+        }
     },
-    methods: {
+  methods: {
     isEmail() {
         return isEmail(this.form.email).then((res) => {
           return res.data ? true : false

@@ -1,31 +1,37 @@
 /*
  * @Author: your name
  * @Date: 2021-01-07 18:28:14
- * @LastEditTime: 2021-05-10 17:20:44
+ * @LastEditTime: 2021-05-24 18:57:06
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \tracking-Pluse:\hjimi\人脸\html\face-recognition-useCase\src\api\user.js
  */
 import request from '@/utils/request'
 import { getToken } from '@/utils/auth'
-import { proxyUrl_1 } from '@/api/public'
-import Mock from '../../mock/proxyUrl'
-const user = 'user/account/'
+import Mock from '../.././mock/proxyUrl'
+import { proxyUrl_1 } from './public'
+const user = 'public/'
+
+/**
+ * @description: 登录
+ */
 export function login(params) {
   return request({
-    url:proxyUrl_1,
+    url: `${ user }login`,
     method: 'POST',
     data: params
   })
 }
+
 
 /**
  * @description: 用户信息
  */
 export function getInfo(token) {
   return request({
-    url: `${ user }info`,
-    method: 'POST',
+    url: 'api/user/info',
+    // url:proxyUrl_1,
+    method: 'GET',
     params: { token }
   })
 }
@@ -36,7 +42,7 @@ export function getInfo(token) {
  */
 export function getMobileCode(params) {
   return request({
-    url: proxyUrl_1,
+    url: `${ user }verification`,
     method: 'POST',
     data: params
   })
@@ -47,7 +53,7 @@ export function getMobileCode(params) {
  */
 export function reg(params) {
   return request({
-    url: proxyUrl_1,
+    url: `${ user }register`,
     method: 'POST',
     data: params
   })
@@ -56,11 +62,14 @@ export function reg(params) {
 /**
  * @description: 判断用户名是否可用
  */
- export function isUser(params) {
+ export function isUser(username, mobile) {
   return request({
-    url: proxyUrl_1,
+    url: `${ user }/exist`,
     method: 'POST',
-    data: params
+    data: {
+      username: username,
+      mobile: mobile
+    }
   })
 }
 
@@ -69,7 +78,7 @@ export function reg(params) {
  */
  export function isEmail(params) {
   return request({
-    url: proxyUrl_1,
+    url: ``,
     method: 'POST',
     data: params
   })
@@ -117,7 +126,7 @@ export function updatePass(params) {
  */
  export function findPass(params) { 
   return request({
-    url:  'user/user/findPass',
+    url:  `${ user }/forgot`,
     method: 'POST',
     data: params
   })

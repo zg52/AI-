@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-01-07 18:28:14
- * @LastEditTime: 2021-04-01 09:45:55
+ * @LastEditTime: 2021-05-24 11:17:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \inventory-apie:\hjimi\人脸辨识云\html\face-recognition-access\src\layout\index.vue
@@ -110,7 +110,6 @@
 import RightPanel from '@/components/RightPanel'
 import { AppMain, Navbar, Settings, Sidebar, TagsView } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
-import { exception_monitoring_blocklist, exception_monitoring_person } from '@/api/alarm'
 import { imgUrl } from '@/api/public'
 import { mapState } from 'vuex'
 let vm
@@ -184,86 +183,12 @@ export default {
       websocketclose(e){  //关闭
         console.log('断开连接',e)
       },
-
-// 监控黑名单人员
-    get_exception_monitoring_blocklist() {
-     exception_monitoring_blocklist(this.lastId1).then((res) => {
-       if(res.code === 0 && res.data) {
-         this.lastId1 = res.data.lastId
-         let records = res.data.records
-      if(records) {
-       if(records.length !== 0) {
-          this.$notify({
-          title: '设备抓拍到黑名单人员',
-          iconClass: 'el-icon-warning w',
-          position: 'bottom-right',
-         dangerouslyUseHTMLString: true,
-         customClass:'warn',
-         message: `<div class="warnSty"><div class="fl"><span>姓名：${ records[0].personName }</span>
-         </div><img width="60" src="${ vm.getImgUrl }${records[0].imageId}"><br><span class="flex">详情</span></div>`,
-         onClick() {
-           vm.$router.push({path: '/traffic-records/index?tab=4'})
-         }
-        })
-       }
-       }
-      }
-    })
-    },
-
-// 监控未通行人员
-    get_exception_monitoring_person() {
-     exception_monitoring_person(this.lastId2).then((res) => {
-       if(res.code === 0 && res.data) {
-         this.lastId2 = res.data.lastId
-         let records = res.data.records
-      if(records) {
-       if(records.length !== 0) {
-          this.$notify({
-          title: '设备抓拍到陌生人',
-          type: 'warning',
-          position: 'bottom-right',
-         dangerouslyUseHTMLString: true,
-         customClass:'warn',
-         message: `<div class="warnSty"><div class="fl"><span>姓名：${ records[0].personName }</span>
-         </div><img width="110" src="${ vm.getImgUrl }${records[0].imageId}"><br><span class="flex">详情</span></div>`,
-         onClick() {
-           vm.$router.push({path: '/traffic-records/index?tab=4'})
-         }
-        })
-       }
-       }
-      }
-    })
-    },
   },
-//   additionalInformation: null
-// category: "blocklist"
-// createTime: "2021-03-30T02:30:38"
-// deviceId: 2
-// id: 234
-// imageId: null
-// lastUpdateTime: null
-// personId: 76
-// personName: "zh"
-// personType: null
-// source: "person"
-// uniqueDeviceIdentifier: "YGVE9CCPUS6QVQJ_"
-// uuid: null
+
   created() {
     vm = this
-    //  this.initWebSocket()
     },
   mounted() {
-    // this.get_exception_monitoring_person()
-    this.get_exception_monitoring_blocklist()
-   setInterval(() => {
-     this.get_exception_monitoring_blocklist()
-   }, 10000)
-
-  //  setInterval(() => {
-  //     this.get_exception_monitoring_person()
-  //  },5000)
   },
 }
 </script>

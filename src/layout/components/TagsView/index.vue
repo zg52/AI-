@@ -27,9 +27,9 @@
         margin-right: 15px;
       }
       &.active {
-        background: #8a16ff;
+        background: #213991;
         color: #fff;
-        border-color: #8a16ff;
+        border-color: #213991;
         &::before {
           content: '';
           background: #fff;

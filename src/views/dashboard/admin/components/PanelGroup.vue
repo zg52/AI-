@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-01-07 18:28:14
- * @LastEditTime: 2021-03-22 15:59:14
+ * @LastEditTime: 2021-05-14 10:13:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \inventory-apie:\hjimi\人脸辨识云\html\face-recognition-access\src\views\dashboard\admin\components\PanelGroup.vue
@@ -32,7 +32,7 @@
       }
 
       .icon-people {
-        background: #8a16ff;
+        background: #409eff;
         .card-panel-icon1 {color: #fff;}
       }
 
@@ -54,7 +54,7 @@
       color: #40c9c6;
     }
     .card-panel-icon1 {
-      color: #8a16ff;
+      color: #409eff;
     }
 
     .icon-message {

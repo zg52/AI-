@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-07 18:28:14
- * @LastEditTime: 2021-03-05 18:54:03
+ * @LastEditTime: 2021-05-24 19:27:04
  * @LastEditors: Please set LastEditors
  * @Description: 全局路由钩子
  * @FilePath: \tracking-Pluse:\hjimi\人脸\html\face-recognition-useCase\src\permission.js
@@ -16,7 +16,7 @@ import getPageTitle from '@/utils/get-page-title'
 
 NProgress.configure({ showSpinner: false }) // 加载条配置
 
-const whiteList = ['/login', '/auth-redirect'] // 无需重定向白名单
+const whiteList = ['/login', '/reg', '/explain','/regSuccess', '/auth-redirect'] // 无需重定向白名单
 
 router.beforeEach(async(to, from, next) => {
   NProgress.start()
@@ -32,6 +32,8 @@ router.beforeEach(async(to, from, next) => {
       next({ path: '/' })
       NProgress.done()
     } else {
+      // next(),   router.addRoutes(await store.dispatch('permission/generateRoutes',[1]))  // 免登陆
+      
       // 通过getInfo判断用户是否获得了权限角色
       const hasRoles = store.getters.roles && store.getters.roles.length > 0
       if (hasRoles) {
@@ -40,10 +42,12 @@ router.beforeEach(async(to, from, next) => {
         try {
           //获取用户信息
           //注意:role必须是一个对象数组!例如:['admin']或['developer'，'editor']
-          const { roles } = await store.dispatch('user/getInfo')
+          const { category } = await store.dispatch('user/getInfo')
+          
+          console.log("🚀 ~ file: permission.js ~ line 39 ~ router.beforeEach ~ hascategory", category)
 
           //根据角色生成可访问路由图
-          const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
+          const accessRoutes = await store.dispatch('permission/generateRoutes', category)
 
           // 动态添加可访问路由
           router.addRoutes(accessRoutes)

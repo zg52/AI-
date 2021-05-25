@@ -9,7 +9,8 @@ const state = {
   username: '',
   avatar: '',
   introduction: '',
-  roles: []
+  roles: [],
+  userType: ''
 }
 
 const mutations = {
@@ -27,6 +28,9 @@ const mutations = {
   },
   SET_ROLES: (state, roles) => {
     state.roles = roles
+  },
+  SET_USER_TYPE: (state, userType) => {
+    state.userType = userType
   }
 }
 
@@ -35,7 +39,11 @@ const actions = {
   login({ commit }, userInfo) {
     const {type, username, password } = userInfo
     return new Promise((resolve, reject) => {
-      login({tppe: type.trim(), username: username.trim(), password: md5(password).toUpperCase() }).then(response => {
+      login({
+        type: type.trim(), username: username.trim(), 
+        password: password.trim()
+        // password: md5(password).toUpperCase()
+      }).then(response => {
         const {code, msg, data } = response
         if(code === 0) {
           commit('SET_TOKEN', data.token)
@@ -43,7 +51,7 @@ const actions = {
           resolve()
         } else {
           reject(msg)
-          Message.error(msg, 5000)
+          // Message.error(msg, 5000)
         }
       }).catch(error => {
         reject(error)
@@ -51,7 +59,7 @@ const actions = {
     })
   },
 
-  // 获取用户信息
+// 获取用户信息
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
@@ -60,13 +68,13 @@ const actions = {
           reject(msg)  // '验证失败，请重新登录！'
         }
 
-        const { roles, username, avatar, introduction } = data
-        if (!roles || roles.length <= 0) {
+        let { category, username, avatar, introduction } = data
+        if (!category || category.length <= 0) {
           // reject('角色必须是一个非空数组!')
           reject('该账户无权访问，请联系管理员!')
         }
 
-        commit('SET_ROLES', roles)
+        commit('SET_ROLES', category)
         commit('SET_USERNAME', username)
         commit('SET_AVATAR', avatar)
         commit('SET_INTRODUCTION', introduction)

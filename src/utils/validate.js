@@ -128,7 +128,7 @@ export function validateChinese(str){
  * @description 输入12~18位数字、字母和符号组合的密码
  */
 export function validatePass(str) {
-  return /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+`\-={}:";'<>?,.\/]).{12,18}$/.test(str)
+  return /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+`\-={}:";'<>?,.\/]).{6,16}$/.test(str)
 }
 
 /**

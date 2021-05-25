@@ -4,20 +4,18 @@
 @import './element-ui.scss';
 @import './sidebar.scss';
 @import './btn.scss';
+@import './font.css';
 
 body {
   height: 100%;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  font-family: Microsoft YaHei Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Arial, sans-serif;
-  background: #f8f8f8;
+  font-family: 'NotoSansSC', 'Microsoft YaHei', 'Helvetica', 'Neue', 'PingFang SC', 'Hiragino Sans GB', 'Arial', 'sans-serif';
+  background: #f5f5f5;
   line-height: 1;
 }
 
-label {
-  // font-weight: 700;
-}
 h1,h2,h3,h4{font-weight: normal;}
 
 html {
@@ -185,7 +183,7 @@ aside {
   z-index: 1000 !important;
 }
 
-// 全局公用 
+// -----------------------全局公用 ---------------------------
 // 外边距
 .mt10 {margin-top: 10px;}
 .mt15 {margin-top: 15px;}
@@ -201,12 +199,19 @@ aside {
 .ml10{margin-left:10px;}
 .ml0{margin-left: 0!important;}
 .ml-5{margin-left: -5px;}
+.mt24{padding-top:24px;}
+.mt30{margin-top: 30px;}
+.mt20{margin-top: 20px;}
+.mt40{margin-top: 40px;}
+
 
 // 内边距
 .pl0{padding-left: 0;}
 .pt10 {padding-top: 10px;}
 .pr-5 {padding-right: 5px;}
 .pl-5 {padding-left: 5px;}
+.p24 {padding: 24px;}
+.p24_pb8 {padding: 24px;padding-bottom: 8px;}
 
 // 宽高圆角
 .w100 { width: 100px; }
@@ -222,15 +227,11 @@ aside {
 .w400 {width: 400px;}
 .h25{height: 25px;}
 
-.radius_45 {
-  border-radius: 45px;
-}
-.flex {
-  display: flex;
-}
-.t_right {
-  text-align: right;
-}
+.radius_45 { border-radius: 45px; }
+.radius_10 { border-radius: 10px; }
+.radius_20 { border-radius: 20px; }
+.t_right { text-align: right; }
+.t_center {text-align: center;}
 .nowap {
   white-space: nowrap;
 }
@@ -297,15 +298,38 @@ border-radius: 50%;
 }
 
 // 色值
-.red {color: red;}
-.green{color: #13ce66;}
+.danger {color: #f56c6c;}
+.success{color: #13ce66;}
+.warning{color: #e6a23c;}
+.theme{color: #1890ff;}
 
 
 // 弹性盒
-.flex {
-  display: flex;
-}
-.flexbetween {
+.flex { display: flex; }
+.flexbetween { display: flex; justify-content: space-between; }
+.item_center{align-items: center;}
+.flex_center {display: flex;justify-content: center;}
+
+
+// --------------------色值-----------------------
+// 背景色
+.bg_fff {background: #fff;}
+.bg_trans {background: transparent;}
+
+
+.caozuo {
+  color: #1890ff;
   display: flex;
   justify-content: space-between;
+  padding-right: 10px;
+  span {
+      cursor: pointer;
+  }
+  .more {
+      letter-spacing: 3px;
+      font-weight: bold;
+      position: relative;
+      top:-4px;
+  }
+
 }

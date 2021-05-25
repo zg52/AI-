@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-01-07 18:28:14
- * @LastEditTime: 2021-03-13 10:34:44
+ * @LastEditTime: 2021-05-14 11:32:41
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \tracking-Pluse:\hjimi\人脸\html\face-recognition-useCase\src\layout\components\Navbar.vue
@@ -11,11 +11,11 @@
   height: 50px;
   overflow: hidden;
   position: relative;
-  background: #fff;
   box-shadow: 0 1px 4px rgba(0,21,41,.08);
+  background: #213991;
 
   .hamburger-container {
-    fill: #8a16ff;
+    fill: #fff;
     line-height: 46px;
     height: 100%;
     float: left;
@@ -51,7 +51,7 @@
       padding: 0 8px;
       height: 100%;
       font-size: 18px;
-      color: #8a16ff;
+      color: #fff;
       vertical-align: text-bottom;
 
       &.hover-effect {
@@ -89,16 +89,8 @@
     }
   }
 }
-.sys_tit {
-  line-height: 50px;
-  color: #8a16ff;
-  font-size: 14px;
-  text-align: center;
-  float: left;
-  margin-left: 4%;
-}
 .name {
-  color: #888;
+  color: #fff;
   display: inline-block;
   margin-left: 10px;
   vertical-align: text-bottom;
@@ -111,7 +103,6 @@
     <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
 
     <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
-    <div class="sys_tit"><svg-icon style="margin-right:4px;transform: rotateY(180deg);" icon-class="sys-tit"/>智能安防/监控/管理一体化门禁系统<svg-icon style="margin-left:4px" icon-class="sys-tit"/></div>
     <div class="right-menu">
       <template v-if="device!=='mobile'">
         

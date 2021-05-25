@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-07 18:28:14
- * @LastEditTime: 2021-01-11 14:43:07
+ * @LastEditTime: 2021-05-25 14:09:57
  * @LastEditors: Please set LastEditors
  * @Description: 通过用户的权限和之前在router.js里面asyncRouterMap的每一个页面所需要的权限做匹配，最后返回一个该用户能够访问路由有哪些。
  * @FilePath: \tracking-Pluse:\hjimi\人脸\html\face-recognition-useCase\src\store\modules\permission.js
@@ -15,6 +15,7 @@ import { asyncRoutes, constantRoutes } from '@/router'
  */
 function hasPermission(roles, route) {
   if (route.meta && route.meta.roles) {
+    roles = [roles] //将权限字符串转为数组
     return roles.some(role => route.meta.roles.includes(role))
   } else {
     return true
@@ -58,7 +59,7 @@ const actions = {
   generateRoutes({ commit }, roles) {
     return new Promise(resolve => {
       let accessedRoutes
-      if (roles.includes('admin')) {
+      if (roles.includes('root')) {
         accessedRoutes = asyncRoutes || []
       } else {
         accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)

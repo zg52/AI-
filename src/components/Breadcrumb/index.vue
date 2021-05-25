@@ -77,10 +77,16 @@ export default {
   font-size: 14px;
   line-height: 50px;
   margin-left: 8px;
+  a {
+    color:#fff
+  }
 
   .no-redirect {
-    color: #97a8be;
+    color: #c4d4e9;
     cursor: text;
+  }
+  ::v-deep .el-breadcrumb__separator {
+    color:#c4d4e9;
   }
 }
 </style>

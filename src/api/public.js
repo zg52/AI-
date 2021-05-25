@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-07 18:28:14
- * @LastEditTime: 2021-03-12 17:56:39
+ * @LastEditTime: 2021-05-20 14:43:09
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \tracking-Pluse:\hjimi\人脸辨识云\html\face-recognition-access\src\api\article.js
@@ -11,6 +11,7 @@
   /**
  * @description: 公用代理地址
  */
+
 let proxyUrl = 'http://www.zg.com'
 export { proxyUrl as  proxyUrl_1}
 

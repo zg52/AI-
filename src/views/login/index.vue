@@ -1,3 +1,31 @@
+
+<style lang="scss">
+.loginBox, .findPass {
+    .el-input {
+    display: inline-block;
+    width: 85%;
+
+    input {
+      background: transparent;
+      border: 0px;
+      -webkit-appearance: none;
+      border-radius: 0px;
+      color: #333;
+      caret-color: #333;
+
+      &:-webkit-autofill {
+        box-shadow: 0 0 0px 1000px #fff inset !important;
+        -webkit-text-fill-color: #333 !important;
+      }
+    }
+  }
+    .el-form-item {
+    border-radius: 5px;
+    color: #454545;
+    border:1px #dcdfe6 solid;
+  }
+}
+</style>
 <style lang="scss" scoped>
 
 .login-container {
@@ -10,7 +38,6 @@
     margin: 0 auto;
     overflow: hidden;
 
-opacity: 1;
 background: #ffffff;
 border-radius: 20px;
   }
@@ -24,15 +51,8 @@ border-radius: 20px;
       font-size: 24px;
     text-align: center;
     }
-    .set-language {
-      color: #fff;
-      position: absolute;
-      top: 3px;
-      font-size: 18px;
-      right: 0px;
-      cursor: pointer;
-    }
   }
+}
   .show-pwd {
     position: absolute;
     right: 10px;
@@ -42,30 +62,11 @@ border-radius: 20px;
     user-select: none;
   }
 
-  .thirdparty-button {
+ .thirdparty-button {
     position: absolute;
     right: 0;
     bottom: 6px;
   }
-}
-
-.container_tit {
-  background: #002766;
-  height: 64px;
-  width: 100%;
-  display: flex;
-  img { 
-    width: 115px; 
-    margin-left: 75px;
-    height: 44px;margin-top: 10px;
-  }
-  span {
-    color: #aa92ff;
-    line-height: 40px;
-    padding-left: 10px;
-    font-size: 14px;
-  }
-}
 .base {
   color: #ccc;
   width: 100%;
@@ -81,15 +82,13 @@ border-radius: 20px;
   display: flex;
   justify-content: center;
   padding-top: 20px;
-  align-items: center;
   .banner {
     margin-right: 280px;
+    margin-top: 9%;
   }
 }
 
-::v-deep .el-form-item--medium {
-  margin-bottom: 30px;
-}
+ 
 .handle_login {
   width:100%;margin-top: 20px;
   padding: 15px 0!important;font-size: 16px!important;
@@ -108,7 +107,7 @@ span {
 .admin {
   ::v-deep {
     .el-form-item__content {line-height: inherit!important;}
-    .el-form-item--medium .el-form-item__content {
+     .el-form-item__content {
       padding: 12px;
       padding-bottom:0;
       cursor: pointer;
@@ -137,13 +136,13 @@ span {
       width: 100%;
       vertical-align: middle;
   }
+}
   .svg-icon {
     fill: #999;
   }
-}
 
   .svg-container {
-    padding: 6px 5px 6px 15px;
+    padding: 4px 5px 4px 15px;
     vertical-align: middle;
     width: 30px;
     display: inline-block;
@@ -209,28 +208,48 @@ span:last-child {
   display: block;
   display: none;
 }
-::v-deep.el-dialog.is-fullscreen {
-  // margin-top:60px;
-  // background: #f8f8f8;
-}
 ::v-deep.el-dialog__wrapper {
   overflow-y: hidden;
 }
- 
+}
+.main {
+  padding-top: 90px;
+}
+.findPass {
+top: 80px;
+}
+.findInfo {
+      position: relative;
+    left: 30px;
+}
+.verifyCode_btn {
+  padding: 12px 20px;
+}
+.email_mobile {
+  display: flex;
+  justify-content: space-between;
+  .code_t {
+    font-size: 14px;
+    color: #409EFF;
+    position: relative;
+    top:15px;
+    cursor: pointer;
+    height: 0px;
+    padding: 2px;
+  }
+.e {
+  width: 280px;
+}
 }
 </style>
 
 <template>
   <div class="login-container">
-    <div class="container_tit"><img src="../../assets/image/home-logo.png"></div>
-
-<div class="main" v-show="loginBox">
-      <div class="banner">
-       <img src="../../assets/image/banner.png" width="657">
-       </div>
-       <div>
-
-<el-form ref="loginForm" v-if="loginShow" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
+  <Head />
+ <div class="main">
+      <div class="banner"> <img src="../../assets/image/banner.png" width="657"> </div>
+  <div>
+    <el-form ref="loginForm" v-if="loginShow" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
       <div class="con">
       <div class="title-container"><h3 class="title">辨识云登录</h3></div>
 
@@ -248,35 +267,40 @@ span:last-child {
       <el-form-item prop="username"><span class="svg-container"><svg-icon icon-class="user" /></span><el-input ref="username" v-model.trim="loginForm.username" placeholder="请输入用户名/手机号/邮箱" name="username" type="text" clearable /></el-form-item>
       <el-form-item prop="password"> <span class="svg-container"><svg-icon icon-class="password" /></span> <el-input ref="password" v-model.trim="loginForm.password" placeholder="请输入密码" type="password" clearable /> </el-form-item>
        <div class="flex flexbetween"><el-checkbox v-model.trim="checked">记住我</el-checkbox><span class="forget" @click="loginShowHandle">忘记密码？</span></div>
-      <el-button class="handle_login" :loading="loading" type="primary" @click.native.prevent="handleLogin">登录</el-button>
+      <el-button class="handle_login" :loading="loading" type="primary" @click.prevent="handleLogin">登录</el-button>
       <p class="wei">还未注册？</p>
-      <el-button type="primary" class="creatRoot" plain @click="creatRootHandle">创建根账户</el-button>
+      <router-link to="/reg"><el-button type="primary" class="creatRoot" plain @click="creatRootHandle">创建根账户</el-button></router-link>
        <el-checkbox v-model.trim="agreeChecked" class="agreeChecked"></el-checkbox><span @click="agreeHandle">阅读并同意《服务条款》《法律声明》《隐私政策》</span>
-</div>
+   </div>
       </div>
     </el-form>
     
 <!-- ###########找回密码 ##########--> 
- <el-form ref="findPassRule" v-if="findPassShow" :model="findPassForm" :rules="findPassRule" class="login-form" autocomplete="on" label-position="left">
-      <div class="title-container"><h3 class="title">人脸辨识云·门禁系统</h3></div>
+ <el-form ref="findPassRule" v-show="!loginShow ? true : false" :model="findPassForm" :rules="findPassRule" class="login-form findPass" autocomplete="on" label-position="left">
+     <div class="con">
+        <div class="title-container"><h3 class="title">忘记密码</h3></div>
       <el-form-item prop="username"><span class="svg-container"><svg-icon icon-class="user" /></span><el-input v-model.trim="findPassForm.username" placeholder="用户名" type="text" clearable /></el-form-item>
-      <el-form-item prop="email"><span class="svg-container"><svg-icon icon-class="emial" /></span><el-input v-model.trim="findPassForm.email" placeholder="邮箱" name="emial" type="text" clearable /></el-form-item>
-      <el-form-item prop="verifyCode" class="verify inline_block"><span class="svg-container"><svg-icon icon-class="authCode" /></span><el-input v-model.trim="findPassForm.verifyCode" placeholder="邮箱验证码" type="text" clearable/></el-form-item>
-      <el-button type="primary" class="verifyCode_btn ml10 inline_block" :disabled="findPassForm.verifyCodeBtnStatus" @click.prevent="getverifyCodeHandler_psw('findPassRule')">{{ findPassForm.verifyCodeTxt }}</el-button>
-      <el-form-item prop="newPass"> <span class="svg-container"><svg-icon icon-class="password" /></span><el-input :key="passwordType" v-model.trim="findPassForm.newPass" :type="passwordType" placeholder="新密码" clearable />
+      <div class="email_mobile">
+        <el-form-item prop="target" class="e" ref="target"><span class="svg-container"><svg-icon :icon-class="toogle_el.icon" /></span> <el-input v-model.trim="findPassForm.target" :placeholder="toogle_el.placeholder" type="text" clearable /></el-form-item>
+        <span class="code_t" @click="toogle_email_phone">{{ toogle_el.tit }}验证</span><br>
+      </div>
+      <el-form-item prop="verifyCode" class="verify inline_block"><span class="svg-container"><svg-icon icon-class="authCode" /></span><el-input v-model.trim="findPassForm.verifyCode" placeholder="验证码" type="text" clearable/></el-form-item>
+      <el-button type="primary" class="verifyCode_btn ml10 inline_block" :disabled="findPassForm.verifyCodeBtnStatus" @click.prevent="getMobileCodeHandler_psw('findPassRule')">{{ findPassForm.verifyCodeTxt }}</el-button>
+
+      <el-form-item prop="password"> <span class="svg-container"><svg-icon icon-class="password" /></span><el-input :key="passwordType" minlength="6" maxlength="16" v-model.trim="findPassForm.password" :type="passwordType" placeholder="新密码" clearable />
+          <el-tooltip class="item" effect="light" placement="top"> <div slot="content">设置的密码应为字母、数字和符号（仅限 ASCII 标准字符）<br/>组合，长度在12~18字符之间</div> <i class="findInfo el-icon-info"></i> </el-tooltip>
           <span class="show-pwd" @click="showPwd"><svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" /></span>
         </el-form-item>
+
       <el-form-item prop="checkPsw"> <span class="svg-container"><svg-icon icon-class="password" /></span><el-input :key="passwordType" v-model.trim="findPassForm.checkPsw"  :type="passwordType" placeholder="确认新密码" clearable />
           <span class="show-pwd" @click="showPwd"><svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" /></span>
         </el-form-item>
-       <div class="flex flexbetween"><el-checkbox v-model.trim="checked">记住密码</el-checkbox> <span class="forget" @click.prevent="goLoginHandle">去登录</span></div>
+       <div class="flex flexbetween"><el-checkbox v-model.trim="checked">记住我</el-checkbox> <span class="forget" @click.prevent="goLoginHandle">去登录</span></div>
       <el-button class="handle_login" :loading="loading" type="primary" @click="changePswHandler('findPassRule')">确 认</el-button>
+     </div>
     </el-form>
    </div>
   </div>
-
-  <Reg v-show="regShow" @regHide_loginShow="regHide_loginShow"/>
-
 <!-- 服务条款 -->
   <el-dialog
     title="用户服务条款 / 法律声明 / 隐私政策"
@@ -292,67 +316,71 @@ span:last-child {
       <el-button type="primary" @click="agreeChecked = true, dialogVisible = false">确 定</el-button>
     </div>
   </el-dialog>
-    <footer class="base">{{ `版权信息： CopyRight © 2016-${ new Date().getFullYear() } 华捷艾米 版权所有 京ICP备18040828号-1` }}</footer>
+  <footer class="base">{{ `版权信息： CopyRight © 2016-${ new Date().getFullYear() } 华捷艾米 版权所有 京ICP备18040828号-1` }}</footer>
 
   </div>
 </template>
 <script>
-
-import Cookies from 'js-cookie'
-import { getVerifyCode, findPass } from "@/api/user"
+import { getMobileCode, findPass } from "@/api/user"
+import { validatePass, validPhone } from '@/utils/validate.js'
 import privacy from '@/views/privacy/privacy'
-import Reg from '@/views/login/components/Reg'
+import Head from './components/Head'
 import md5 from 'js-md5'
-import { filterAsyncRoutes } from '@/store/modules/permission'
+import Cookies from 'js-cookie'
+
+let vm
 
 export default {
+  name: 'login',
   components: {
     privacy,
-    Reg
+    Head
   },
-  name: 'login',
   data() {
-  let validatePsw1 = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error("请再次输入密码"))
-      } else if (value !== this.findPassForm.newPass) {
-        callback(new Error("两次输入密码不一致!"))
+  let validatePsw_regist = (rule, value, callback) => {
+      value === ""
+        ? callback(new Error("请输入密码"))
+        : !validatePass(value)
+        ? callback(new Error("请输入12~18位数字、字母和符号组合的密码"))
+        : this.findPassForm.checkPsw !== ""
+        ? this.$refs.findPassRule.validateField("checkPsw")
+        : callback()
+      callback()
+    },
+     validatePsw1_regist = (rule, value, callback) => {
+      value === ""
+        ? callback(new Error("请再次输入密码"))
+        : value !== this.findPassForm.password
+        ? callback(new Error("两次输入密码不一致!"))
+        : callback()
+      callback()
+    },
+    validatePhone = (rule, value, callback) => {
+      if (!validPhone(value)) {
+        callback(new Error("手机号格式错误"))
       } else {
         callback()
       }
-    }
-    const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
-      } else {
-        callback()
-      }
-    }
-    const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
-      } else {
-        callback()
-      }
-    }
+     }
+
     function notNull(notNullName) { return [{required: true, message: `请输入${ notNullName }`, trigger: "blur" }] }
+
     return {
-      loginBox: false,
       regShow: true,
-      radio: '2',
-      active0: false,
-      active1: true,
+      radio: '1',
+      active0: true,
+      active1: false,
       agreeChecked: true,
       dialogVisible: false,
       regDialog: true,
-
       loginShow: true,
-      findPassShow: false,
       checked: false,
       checkedStatus: false,
+
       loginForm: {
-        username: null,
-        password: null
+        username: 'zhanglong123',
+        password: '12345qwe.',
+        type: 'USER'
       },
       loginRules: {
         username:  notNull('用户名'),
@@ -360,17 +388,18 @@ export default {
       },
 
       findPassForm: {
-        username: null,
-        email: null,
-        verifyCode: null,
-        newPass: null,
-        checkPsw: null,
+        username: 'qwer1234',
+        target: 'fwafe@163.com',
+        verifyCode: 1223,
+        password: '12345qwe.',
+        checkPsw: '12345qwe.',
         verifyCodeTxt: "获取验证码",
         verifyCodeBtnStatus: false,
         verifyCodeTime: 60,
       },
       findPassRule: {
         username: notNull('用户名'),
+        target: [],
         email: [
           notNull('邮箱地址')[0],
           {
@@ -379,23 +408,26 @@ export default {
             trigger: ["blur", "change"],
           },
         ],
-        verifyCode:notNull('验证码'),
-        newPass: [
-          notNull('新密码')[0],
-          {
-            min: 6,
-            message: "请输入大于6位数字和字母组合的密码",
-            trigger: "blur",
-          },
-        ],
-        checkPsw: [{required: true, validator: validatePsw1, trigger: 'blur' }],
+        mobile: [notNull('手机号')[0], { validator: validatePhone, trigger: "blur" }],
+        verifyCode: notNull('验证码'),
+        password: [{required: true, validator: validatePsw_regist, trigger: "blur" }],
+        checkPsw: [{required: true,  validator: validatePsw1_regist, trigger: "blur" }]
+      },
+      toogle_el: {
+        target: 'longaruI@163.com',
+        icon: 'email',
+        prop: 'email',
+        placeholder: '邮箱',
+        tit: '短信'
       },
       passwordType: 'password',
       capsTooltip: false,
       loading: false,
       showDialog: false,
       redirect: undefined,
-      otherQuery: {},
+      otherQuery: {
+      },
+      toogle_status:true
     }
   },
   watch: {
@@ -408,30 +440,34 @@ export default {
         }
       },
       immediate: true
+    },
+     radio() {
+     this.loginForm.type = this.radio === '1' ? 'USER' : 'IAM' 
     }
   },
   methods: {
-    regHide_loginShow() {
-      this.regShow = false, this.loginBox = true
-    },
-    creatRootHandle() {
-      this.regShow = true, this.loginBox = false
-    },
-    rootBox() {
-      this.radio = '1'
-      this.active0 = true
-      this.active1 = false
-    },
-    iamBox() {
-      this.radio = '2'
-      this.active0 = false
-      this.active1 = true
+    regHide_loginShow() { this.regShow = false, this.loginBox = true },
+    creatRootHandle() { this.regShow = true, this.loginBox = false },
+    rootBox() { this.radio = '1', this.active0 = true, this.active1 = false },
+    iamBox() { this.radio = '2', this.active0 = false, this.active1 = true },
+    toogle_email_phone() {
+      let findPassForm = this.findPassForm, findPassRule = this.findPassRule, _field = this.$refs['findPassRule'].fields
+      findPassForm['target'] =  null
+      this.toogle_status
+       ? (this.toogle_el = { icon: 'mobile', placeholder: '手机号', tit: '邮箱' }, findPassRule['target'] = findPassRule['mobile'], this.toogle_status = false)
+       : (this.toogle_el = { icon: 'email', placeholder: '邮箱', tit: '短信' }, findPassRule['target'] = findPassRule['email'], this.toogle_status = true)
+
+     _field.map(i => {
+    if(i.prop === 'target'){
+        i.clearValidate() 
+        // i.resetField() 
+    }
+})
     },
     agreeHandle() {
       this.dialogVisible = true
     },
     info() {
-      // alert(0)
     },
     checkCapslock(e) {
       const { key } = e
@@ -482,11 +518,10 @@ export default {
     },
      loginShowHandle() {
       this.loginShow = false
-      this.findPassShow = true
     },
     goLoginHandle() {
-      this.findPassShow = false
       this.loginShow = true
+      this.$refs['findPassRule'].clearValidate()
     },
 
 
@@ -516,67 +551,66 @@ export default {
         })
       })
     },
-// 修改密码-发送邮箱验证码
-    getverifyCodeHandler_psw(findPassRule) {
-      this.$refs[findPassRule].validateField("email", (validEmail) => {
-        if (!validEmail) {
-          getVerifyCode({
-            username: this.findPassForm.username,
-            email: this.findPassForm.email
+
+// 修改密码-发送短信/邮箱验证码
+    getMobileCodeHandler_psw(findPassRule) {
+       vm.$refs[findPassRule].validateField('target', (validEmail) => {
+         this.toogle_el.tit === '短信' ? phoneCode() : emailCode()
+         function phoneCode() {
+         if (!validEmail) {
+          getEmailCode({
+            target: vm.findPassForm.target
           }).then((res) => {
             if (res.code == 0 && res.data) {
-              this.verifyCodeHandler(this.findPassForm, 'verifyCodeTime')
-            } else {
-              this.$message.error(res.msg)
+              vm.verifyCodeHandler(vm.findPassForm, 'verifyCodeTime')
             }
           })
         }
+         }
+         function emailCode() {
+         if (!validEmail) {
+          getMobileCode({
+            mobile: vm.findPassForm.target
+          }).then((res) => {
+            if (res.code == 0 && res.data) {
+              vm.findPassForm.verifyCode = res.data
+              vm.verifyCodeHandler(vm.findPassForm, 'verifyCodeTime')
+            } else {
+              vm.$message.error('验证码发送失败，请重试！')
+            }
+          })
+        }
+         }
       })
     },
-// 找回密码-提交并登录
+
+// 找回密码
     changePswHandler(findPassRule) {
       let _this = this,
       user = this.findPassForm
       this.$refs[findPassRule].validate((valid) => {
         if (valid) {
-          let changePswOld = {...this.findPassForm}
           startResetPsw()
           function startResetPsw() {
-            findPass(Object.assign(changePswOld, { 
-              newPass: md5(changePswOld.newPass).toUpperCase()
-            })).then((res) => {
+            findPass({
+              mobile: user.target,
+              verifyCode: user.verifyCode,
+              password: user.password
+              //  md5(user.password).toLocaleUpperCase()
+            }).then((res) => {
               if (res.code === 0) {
-
                 if (_this.loading) { return }
-                _this.loading = true
-                let users = {
-                  username: user['username'],
-                  password: user['newPass']
-                }
- 
-           _this.$store.dispatch('user/login',users).then(() => {
-           _this.$router.push({ path: _this.redirect || '/', query: _this.otherQuery })
-           _this.$message.success('密码修改成功，系统已为您自动登录！', 4000)
-           _this.$refs.findPassRule.resetFields()
-           if(_this.checked) {
-              Cookies.set('username', users['username'], {expires: 10})
-             Cookies.set('password', users['password'], {expires: 10})
-             Cookies.set('checkedStatus', true)
-           } else {
-             Cookies.remove('username')
-             Cookies.remove('checkedStatus')
-           }
-            }).finally(() => {
-                    _this.loading = false
-                  })
-              } else {
-               _this.$message.error(res.msg)
+                vm.$message.success('密码修改成功，请登录', 4000), vm.loginShow = true
               }
             })
           }
         }
       })
     }
+  },
+  created() {
+    vm = this
+    this.findPassRule.target = this.findPassRule.email
   },
   mounted() {
   this.$nextTick(() => {
@@ -596,31 +630,3 @@ export default {
   },
 }
 </script>
-  <style lang="scss">
-
-.loginBox {
-    .el-input {
-    display: inline-block;
-    width: 85%;
-
-    input {
-      background: transparent;
-      border: 0px;
-      -webkit-appearance: none;
-      border-radius: 0px;
-      color: #333;
-      caret-color: #333;
-
-      &:-webkit-autofill {
-        box-shadow: 0 0 0px 1000px #fff inset !important;
-        -webkit-text-fill-color: #333 !important;
-      }
-    }
-  }
-    .el-form-item {
-    border-radius: 5px;
-    color: #454545;
-    border:1px #dcdfe6 solid;
-  }
-}
-</style>

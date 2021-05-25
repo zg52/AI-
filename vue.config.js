@@ -6,18 +6,11 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
-const name = defaultSettings.title || '人脸辨识云 · 门禁' // 页面标签标题
+const name = defaultSettings.title || '智能云服务平台' // 页面标签标题
 const port = process.env.port || process.env.npm_config_port || 8080 // dev port
 
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {
-  /**
-   * You will need to set publicPath if you plan to deploy your site under a sub path,
-   * for example GitHub Pages. If you plan to deploy your site to https://foo.github.io/bar/,
-   * then publicPath should be set to "/bar/".
-   * In most cases please use '/' !!!
-   * Detail: https://cli.vuejs.org/config/#publicpath
-   */
   publicPath: './',
   outputDir: 'dist',
   assetsDir: 'static',
@@ -25,13 +18,13 @@ module.exports = {
   productionSourceMap: false,
   devServer: {
     proxy: {
-      // "/_api": {
-      //   target: "http://192.168.10.148:31181/",
-      //   // target: "http://192.168.10.148:8082/",
-      //   pathRewrite: { "^/_api": "" },
-      //   changeOrigin: true,
-      //   // ws: true //代理websockes
-      // }
+      "/_api": {
+        target: "http://192.168.10.119:32278/",
+        // target: "http://192.168.10.148:8082/",
+        pathRewrite: { "^/_api": "" },
+        changeOrigin: true,
+        // ws: true //代理websockes
+      }
     },
     port: port,
     open: true,
