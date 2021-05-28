@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-08 15:49:00
- * @LastEditTime: 2021-05-24 16:35:58
+ * @LastEditTime: 2021-05-27 15:51:06
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \inventory-apie:\hjimi\人脸辨识云\html\gitee\pc\faceCloudWebsite\src\views\login\reg.vue
@@ -14,14 +14,14 @@ background: #fff;
 border-radius: 20px;
 margin-top: 50px;
 padding-top: 30px;
-padding-bottom: 100px;
+padding-bottom: 20px;
 h4 {
   color: #333;
   font-size: 24px;
   display: block;
   text-align: center;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-bottom: 40px;
+  padding-top: 40px;
 }
 }
 .form {width: 400px;

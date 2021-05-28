@@ -102,7 +102,14 @@ export const asyncRoutes = [
         path: 'sassList',
         name: 'sassList',
         component: () => import('@/views/sass-manage/sassList/sassList'),
-        meta: { title: 'Sass服务', icon: 'sass' },
+        meta: { title: 'SasS服务', icon: 'sass' },
+      },
+      {
+        path: 'sassDes',
+        name: 'sassDes',
+        component: () => import('@/views/sass-manage/sassList/sassDes'),
+        meta: { title: 'SasS服务详情', icon: 'sass'},
+        hidden: true 
       },
     ]
   },
@@ -114,7 +121,7 @@ export const asyncRoutes = [
         path: 'passList',
         name: 'passList',
         component: () => import('@/views/pass-manage/passList/passList'),
-        meta: { title: 'Pass服务', icon: 'sdk' },
+        meta: { title: 'PasS服务', icon: 'sdk' },
       },
     ]
   },
@@ -149,12 +156,12 @@ export const asyncRoutes = [
     meta: { title: '系统管理', icon: 'el-icon-setting', noCache: true, roles:'root' },
     redirect: '/system-manage/user',
     children: [
-          {
-            path: 'user',
-            component: () => import('@/views/system-manage/user'),
-            name: 'user',
-            meta: { title: '用户管理', icon: 'user' }
-          },
+          // {
+          //   path: 'user',
+          //   component: () => import('@/views/system-manage/user'),
+          //   name: 'user',
+          //   meta: { title: '用户管理', icon: 'user' }
+          // },
           {
             path: 'permission',
             component: () => import('@/views/system-manage/'),

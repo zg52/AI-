@@ -126,7 +126,7 @@ export default {
 }
 
 .handle-button {
-  background: #8d1eff!important;
+  // background: #8d1eff!important;
   width: 48px;
   height: 48px;
   position: absolute;

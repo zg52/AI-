@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-12 11:11:21
- * @LastEditTime: 2021-05-13 10:26:05
+ * @LastEditTime: 2021-05-27 15:51:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \inventory-apie:\hjimi\人脸辨识云\html\gitlab\pc\faceCloudWebsite\src\views\login\regSuccess.vue
@@ -46,7 +46,7 @@ h4 {
   font-size: 24px;
   display: block;
   text-align: center;
-  padding-top: 5px;
+ padding-top: 40px;
   padding-bottom: 5px;
 }
 }

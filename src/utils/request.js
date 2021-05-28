@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-07 18:28:14
- * @LastEditTime: 2021-05-19 15:15:42
+ * @LastEditTime: 2021-05-27 11:18:34
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \tracking-Pluse:\hjimi\人脸\html\face-recognition-useCase\src\utils\request.js
@@ -53,7 +53,7 @@ service.interceptors.response.use(
       if(!hash.includes('/login')) removeToken(), router.go(0), router.push({path:'/login'})
     }
     if(code !== 0) { 
-      Message.error(msg, 4000)
+      Message.error(msg || '系统异常', 4000)
     }
     console.log(response.data)
     return response.data

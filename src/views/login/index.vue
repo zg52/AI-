@@ -47,6 +47,7 @@ border-radius: 20px;
   .title-container {
     position: relative;
     margin-bottom:50px;
+    padding-top: 30px;
     .title {
       font-size: 24px;
     text-align: center;
@@ -99,6 +100,8 @@ border-radius: 20px;
 color: #999;
 font-size: 12px;
 padding-left: 26px;
+position: relative;
+    top: 9px;
 span {
   cursor: pointer;
   color: #409EFF;
@@ -109,7 +112,7 @@ span {
     .el-form-item__content {line-height: inherit!important;}
      .el-form-item__content {
       padding: 12px;
-      padding-bottom:0;
+      padding-bottom:22px;
       cursor: pointer;
     }
     .el-form-item--medium {
@@ -160,6 +163,7 @@ span {
   color: #999;
   padding-top: 14px;
   text-align: center;
+  padding-bottom: 14px;
 }
 .creatRoot {
   width: 100%;
@@ -488,12 +492,12 @@ export default {
             this.loading = true
           this.$store.dispatch('user/login',user).then(() => {
            if(this.checked) {
-              Cookies.set('username',user['username'], {expires: 10})
-             Cookies.set('password',user['password'], {expires: 10})
-             Cookies.set('checkedStatus', true)
+              Cookies.set('cloud_username',user['username'], {expires: 10})
+             Cookies.set('cloud_password',user['password'], {expires: 10})
+             Cookies.set('cloud_checkedStatus', true)
            } else {
-             Cookies.remove('username')
-             Cookies.remove('checkedStatus')
+             Cookies.remove('cloud_username')
+             Cookies.remove('cloud_checkedStatus')
            }
               this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
               this.loading = false
@@ -621,9 +625,9 @@ export default {
     }
   
    let user = this.loginForm
-   if(Cookies.get('username') && Cookies.get('checkedStatus')) {
-     user['username'] = Cookies.get('username')
-     user['password'] = Cookies.get('password')
+   if(Cookies.get('cloud_username') && Cookies.get('cloud_checkedStatus')) {
+     user['username'] = Cookies.get('cloud_username')
+     user['password'] = Cookies.get('cloud_password')
      this.checked = true
    }
     })

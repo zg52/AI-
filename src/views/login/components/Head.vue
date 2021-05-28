@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-11 15:00:00
- * @LastEditTime: 2021-05-11 16:44:59
+ * @LastEditTime: 2021-05-26 15:31:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \inventory-apie:\hjimi\人脸辨识云\html\gitlab\pc\faceCloudWebsite\src\views\login\components\head.vue
@@ -17,7 +17,7 @@
   img { 
     width: 115px; 
     margin-left: 75px;
-    height: 44px;margin-top: 10px;
+    height: 44px;margin-top: 12px;
   }
   span {
     color: #aa92ff;
@@ -29,6 +29,6 @@
 </style>
 <template>
  <div>
-    <div class="container_tit"><img src="../../../assets/image/home-logo.png"></div>
+    <div class="container_tit"><img src="../../../assets/image/logo3.png"></div>
  </div>
 </template>
