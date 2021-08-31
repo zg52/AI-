@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-23 11:47:43
+ * @LastEditTime: 2021-07-28 23:25:54
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit  
+ * @FilePath: \inventory-apie:\hjimi\人脸辨识云\html\gitlab\pc\faceCloudWebsite\src\layout\components\Sidebar\index.vue
+-->
 <template>
   <div :class="{'has-logo':showLogo}">
     <logo v-if="showLogo" :collapse="isCollapse" />
@@ -15,6 +23,7 @@
         <sidebar-item v-for="route in permission_routes" :key="route.path" :item="route" :base-path="route.path" />
       </el-menu>
     </el-scrollbar>
+      <p>hhh</p>
   </div>
 </template>
 

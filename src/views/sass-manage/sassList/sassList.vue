@@ -58,12 +58,12 @@ text-align: center;
     }
 </style>
 <template>
-  <div class="app-container sass">
+  <div class="app_container sass">
     <div class="box_style yet">
       <h4>已开通服务</h4>
       <el-row>
         <el-col :span="24"> 
-          <ul class="list flex">
+          <ul class="flex list">
             <li v-for="(yetProduct, index) of yetProducts" :key="index">
                <div class="img"><img :src="yetProduct.img" width="72" alt=""></div>
                <div class="t">{{ yetProduct.tit }}</div>
@@ -78,7 +78,7 @@ text-align: center;
       <h4>未开通服务</h4>
       <el-row>
         <el-col :span="24"> 
-          <ul class="list flex">
+          <ul class="flex list">
             <li v-for="(noProduct, index) of noProducts" :key="index">
                <div class="img"><img :src="noProduct.img" width="72" alt=""></div>
                 <div class="t">{{ noProduct.tit }}</div>

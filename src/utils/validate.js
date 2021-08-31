@@ -1,7 +1,11 @@
-/**
- * Created by PanJiaChen on 16/11/18.
+/*
+ * @Author: long
+ * @Date: 2021-04-23 11:47:43
+ * @LastEditTime: 2021-08-27 16:13:41
+ * @LastEditors: Please set LastEditors
+ * @Description: 全局字段校验方法
+ * @FilePath: \ant-design-vue-jeecge:\hjimi\人脸辨识云\html\gitlab\pc\faceCloudWebsite\src\utils\validate.js
  */
-
 /**
  * @param {string} path
  * @returns {Boolean}
@@ -94,6 +98,7 @@ export function isString(str) {
 }
 
 /**
+ *  @description 数组
  * @param {Array} arg
  * @returns {Boolean}
  */
@@ -105,6 +110,7 @@ export function isArray(arg) {
 }
 
 /**
+* @description 身份证
  * @param {string} str 
  * @returns {Boolean}
  */
@@ -113,32 +119,48 @@ export function validateIdCard(idCard){
 }
 
 /**
+ * @description 不能输入中文和特殊字符
  * @param {string} str 
  * @returns {Boolean}
- * @description 不能输入中文和特殊字符
  */
 export function validateChinese(str){
   return /[^\w]/.test(str) ? true : false
 }
 
+/**
+ * @description 不能输入特殊字符
+ * @param {string} str
+ * @returns {Boolean}
+ */
+ export function validateChars(str){
+  return /[^\u4e00-\u9fa5\w]/.test(str) ? true : false
+}
 
 /**
+ * @description 输入12~18位数字、字母和符号组合的密码
  * @param {string} str 
  * @returns {Boolean}
- * @description 输入12~18位数字、字母和符号组合的密码
  */
 export function validatePass(str) {
-  return /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+`\-={}:";'<>?,.\/]).{6,16}$/.test(str)
+  return /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+`\-={}:";'<>?,.\/]).{12,18}$/.test(str)
 }
 
 /**
+ * @description 名称校验，数字和字母组合名称（默认 4~20位）
  * @param {string} str 
  * @returns {Boolean}
- * @description 输入4~12位数字和字母组合的密码
  */
- export function validateRegName(str) {
-  return /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{4,20}$/.test(str)
+ export function validateNames(str, num1, num2) {
+   let startNum = num1 || 4, endNum = num2 || 20
+   let nameReg = new RegExp('^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{' + startNum + ',' + endNum + '}$', 'g')
+   return nameReg.test(str)
 }
 
-
-
+/**
+ * @description 社会统一信用代码
+ * @param {string} str 
+ * @returns {Boolean}
+ */
+ export function validateCreditCode(str) {
+  return /^[^_IOZSVa-z\W]{2}\d{6}[^_IOZSVa-z\W]{10}$/g.test(str)
+}

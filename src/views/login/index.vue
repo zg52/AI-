@@ -259,7 +259,7 @@ top: 80px;
 
 <div class="admin">
        <el-form-item :class="{active: active0}" @click.native="rootBox"> <el-radio v-model="radio" label="1">根用户</el-radio> <p>执行需要无限制访问权限的任务的账户拥有者。<span @click="info">了解更多</span></p> </el-form-item>
-      <el-form-item :class="{active: active1}" @click.native="iamBox"> <el-radio v-model="radio" label="2">IAM用户</el-radio> <p>在账户中执行日常任务的用户。<span @click="info">了解更多</span></p> </el-form-item>
+       <el-form-item :class="{active: active1}" @click.native="iamBox"> <el-radio v-model="radio" label="2">IAM用户</el-radio> <p>在账户中执行日常任务的用户。<span @click="info">了解更多</span></p> </el-form-item>
 </div>
 
 <div class="loginBox">
@@ -268,8 +268,15 @@ top: 80px;
        <span class="active">账户密码登录</span>
        <span>短信登录</span>
      </div>
-      <el-form-item prop="username"><span class="svg-container"><svg-icon icon-class="user" /></span><el-input ref="username" v-model.trim="loginForm.username" placeholder="请输入用户名/手机号/邮箱" name="username" type="text" clearable /></el-form-item>
-      <el-form-item prop="password"> <span class="svg-container"><svg-icon icon-class="password" /></span> <el-input ref="password" v-model.trim="loginForm.password" placeholder="请输入密码" type="password" clearable /> </el-form-item>
+      <el-form-item prop="username" v-if="iamNptShow()"><span class="svg-container"><svg-icon icon-class="domain" /></span>
+      <el-input auto-complete="on" ref="username" v-model.trim="loginForm.domain" placeholder="请输入专属域名" name="username" type="text" clearable />
+      </el-form-item>
+      
+      <el-form-item prop="username"><span class="svg-container"><svg-icon icon-class="user" /></span>
+      <el-input auto-complete="on" ref="username" v-model.trim="loginForm.username" :placeholder="nameTipType()" name="username" type="text" clearable />
+      </el-form-item>
+
+      <el-form-item prop="password"> <span class="svg-container"><svg-icon icon-class="password" /></span> <el-input auto-complete="on" ref="password" v-model.trim="loginForm.password" placeholder="请输入密码" type="password" clearable /> </el-form-item>
        <div class="flex flexbetween"><el-checkbox v-model.trim="checked">记住我</el-checkbox><span class="forget" @click="loginShowHandle">忘记密码？</span></div>
       <el-button class="handle_login" :loading="loading" type="primary" @click.prevent="handleLogin">登录</el-button>
       <p class="wei">还未注册？</p>
@@ -283,20 +290,20 @@ top: 80px;
  <el-form ref="findPassRule" v-show="!loginShow ? true : false" :model="findPassForm" :rules="findPassRule" class="login-form findPass" autocomplete="on" label-position="left">
      <div class="con">
         <div class="title-container"><h3 class="title">忘记密码</h3></div>
-      <el-form-item prop="username"><span class="svg-container"><svg-icon icon-class="user" /></span><el-input v-model.trim="findPassForm.username" placeholder="用户名" type="text" clearable /></el-form-item>
+      <el-form-item prop="username"><span class="svg-container"><svg-icon icon-class="user" /></span><el-input auto-complete="on" v-model.trim="findPassForm.username" placeholder="用户名" type="text" clearable /></el-form-item>
       <div class="email_mobile">
-        <el-form-item prop="target" class="e" ref="target"><span class="svg-container"><svg-icon :icon-class="toogle_el.icon" /></span> <el-input v-model.trim="findPassForm.target" :placeholder="toogle_el.placeholder" type="text" clearable /></el-form-item>
+        <el-form-item prop="target" class="e" ref="target"><span class="svg-container"><svg-icon :icon-class="toogle_el.icon" /></span> <el-input auto-complete="on" v-model.trim="findPassForm.target" :placeholder="toogle_el.placeholder" type="text" clearable /></el-form-item>
         <span class="code_t" @click="toogle_email_phone">{{ toogle_el.tit }}验证</span><br>
       </div>
       <el-form-item prop="verifyCode" class="verify inline_block"><span class="svg-container"><svg-icon icon-class="authCode" /></span><el-input v-model.trim="findPassForm.verifyCode" placeholder="验证码" type="text" clearable/></el-form-item>
       <el-button type="primary" class="verifyCode_btn ml10 inline_block" :disabled="findPassForm.verifyCodeBtnStatus" @click.prevent="getMobileCodeHandler_psw('findPassRule')">{{ findPassForm.verifyCodeTxt }}</el-button>
 
-      <el-form-item prop="password"> <span class="svg-container"><svg-icon icon-class="password" /></span><el-input :key="passwordType" minlength="6" maxlength="16" v-model.trim="findPassForm.password" :type="passwordType" placeholder="新密码" clearable />
-          <el-tooltip class="item" effect="light" placement="top"> <div slot="content">设置的密码应为字母、数字和符号（仅限 ASCII 标准字符）<br/>组合，长度在12~18字符之间</div> <i class="findInfo el-icon-info"></i> </el-tooltip>
+      <el-form-item prop="password"> <span class="svg-container"><svg-icon icon-class="password" /></span><el-input auto-complete="on" :key="passwordType" minlength="6" maxlength="16" v-model.trim="findPassForm.password" :type="passwordType" placeholder="新密码" clearable />
+          <el-tooltip class="item" effect="light" placement="top"> <div slot="content">设置的密码应为字母、数字和符号（仅限 ASCII 标准字符）<br/>组合，长度在12 ~ 18字符之间</div> <i class="findInfo el-icon-info"></i> </el-tooltip>
           <span class="show-pwd" @click="showPwd"><svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" /></span>
-        </el-form-item>
+      </el-form-item>
 
-      <el-form-item prop="checkPsw"> <span class="svg-container"><svg-icon icon-class="password" /></span><el-input :key="passwordType" v-model.trim="findPassForm.checkPsw"  :type="passwordType" placeholder="确认新密码" clearable />
+      <el-form-item prop="checkPsw"> <span class="svg-container"><svg-icon icon-class="password" /></span><el-input auto-complete="on" :key="passwordType" v-model.trim="findPassForm.checkPsw"  :type="passwordType" placeholder="确认新密码" clearable />
           <span class="show-pwd" @click="showPwd"><svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" /></span>
         </el-form-item>
        <div class="flex flexbetween"><el-checkbox v-model.trim="checked">记住我</el-checkbox> <span class="forget" @click.prevent="goLoginHandle">去登录</span></div>
@@ -325,11 +332,11 @@ top: 80px;
   </div>
 </template>
 <script>
-import { getMobileCode, findPass } from "@/api/user"
+import { getMobileCode, findPass, getEmailCode_findPass } from "@/api/user"
 import { validatePass, validPhone } from '@/utils/validate.js'
 import privacy from '@/views/privacy/privacy'
 import Head from './components/Head'
-import md5 from 'js-md5'
+// import md5 from 'js-md5'
 import Cookies from 'js-cookie'
 
 let vm
@@ -382,6 +389,7 @@ export default {
       checkedStatus: false,
 
       loginForm: {
+        domain: '',
         username: 'zhanglong123',
         password: '12345qwe.',
         type: 'USER'
@@ -392,11 +400,11 @@ export default {
       },
 
       findPassForm: {
-        username: 'qwer1234',
-        target: 'fwafe@163.com',
-        verifyCode: 1223,
-        password: '12345qwe.',
-        checkPsw: '12345qwe.',
+        username: '',
+        target: '',
+        verifyCode: '',
+        password: '12345qweqwe.',
+        checkPsw: '12345qweqwe.',
         verifyCodeTxt: "获取验证码",
         verifyCodeBtnStatus: false,
         verifyCodeTime: 60,
@@ -447,6 +455,7 @@ export default {
     },
      radio() {
      this.loginForm.type = this.radio === '1' ? 'USER' : 'IAM' 
+     this.loading = false
     }
   },
   methods: {
@@ -455,18 +464,19 @@ export default {
     rootBox() { this.radio = '1', this.active0 = true, this.active1 = false },
     iamBox() { this.radio = '2', this.active0 = false, this.active1 = true },
     toogle_email_phone() {
-      let findPassForm = this.findPassForm, findPassRule = this.findPassRule, _field = this.$refs['findPassRule'].fields
-      findPassForm['target'] =  null
-      this.toogle_status
-       ? (this.toogle_el = { icon: 'mobile', placeholder: '手机号', tit: '邮箱' }, findPassRule['target'] = findPassRule['mobile'], this.toogle_status = false)
-       : (this.toogle_el = { icon: 'email', placeholder: '邮箱', tit: '短信' }, findPassRule['target'] = findPassRule['email'], this.toogle_status = true)
+      this.$msg.info('暂不支持手机号验证')
+//       let findPassForm = this.findPassForm, findPassRule = this.findPassRule, _field = this.$refs['findPassRule'].fields
+//       findPassForm['target'] =  null
+//       this.toogle_status
+//        ? (this.toogle_el = { icon: 'mobile', placeholder: '手机号', tit: '邮箱' }, findPassRule['target'] = findPassRule['mobile'], this.toogle_status = false)
+//        : (this.toogle_el = { icon: 'email', placeholder: '邮箱', tit: '短信' }, findPassRule['target'] = findPassRule['email'], this.toogle_status = true)
 
-     _field.map(i => {
-    if(i.prop === 'target'){
-        i.clearValidate() 
-        // i.resetField() 
-    }
-})
+//      _field.map(i => {
+//     if(i.prop === 'target'){
+//         i.clearValidate() 
+//         // i.resetField() 
+//     }
+// })
     },
     agreeHandle() {
       this.dialogVisible = true
@@ -490,22 +500,24 @@ export default {
         if (valid) {
          if(this.agreeChecked) {
             this.loading = true
-          this.$store.dispatch('user/login',user).then(() => {
-           if(this.checked) {
-              Cookies.set('cloud_username',user['username'], {expires: 10})
-             Cookies.set('cloud_password',user['password'], {expires: 10})
-             Cookies.set('cloud_checkedStatus', true)
-           } else {
-             Cookies.remove('cloud_username')
-             Cookies.remove('cloud_checkedStatus')
-           }
-              this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
+          this.$store.dispatch('user/login', user).then((res) => {
+            if(res) {
+              if(this.checked) {
+                 Cookies.set('cloud_username',user['username'], {expires: 10})
+                Cookies.set('cloud_password',user['password'], {expires: 10})
+                Cookies.set('cloud_checkedStatus', true)
+              } else {
+                Cookies.remove('cloud_username')
+                Cookies.remove('cloud_checkedStatus')
+              }
+               this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
+            }
               this.loading = false
             }).catch(() => {
               this.loading = false
             })
          } else {
-           this.$message('请阅读并同意《服务条款》《法律声明》《隐私政策》', 4000)
+           this.$message.warning('请阅读并同意《服务条款》《法律声明》《隐私政策》', 4000)
          }
         } else {
           return false
@@ -548,39 +560,36 @@ export default {
       new Promise((resolved) => {
         if (timeDecrease != 58) resolved()
       }).then(() => {
-        _this.$message({
-          message: "验证码已发送至邮箱，请注意查收",
-          type: "success",
-          duration: 5 * 1000,
-        })
+        _this.$msg.success("验证码已发送至邮箱，请注意查收", 5)
       })
     },
 
 // 修改密码-发送短信/邮箱验证码
     getMobileCodeHandler_psw(findPassRule) {
        vm.$refs[findPassRule].validateField('target', (validEmail) => {
-         this.toogle_el.tit === '短信' ? phoneCode() : emailCode()
+         this.toogle_el.tit === '短信' ? emailCode() : phoneCode()
          function phoneCode() {
-         if (!validEmail) {
-          getEmailCode({
-            target: vm.findPassForm.target
-          }).then((res) => {
-            if (res.code == 0 && res.data) {
-              vm.verifyCodeHandler(vm.findPassForm, 'verifyCodeTime')
-            }
-          })
-        }
+        //  if (!validEmail) {
+        //   getEmailCode_findPass({
+        //     username: vm.findPassForm.username,
+        //     email: vm.findPassForm.target
+        //   }).then((res) => {
+        //     if (res.code == 0 && res.data) {
+        //       vm.verifyCodeHandler(vm.findPassForm, 'verifyCodeTime')
+        //     }
+        //   })
+        // }
          }
          function emailCode() {
          if (!validEmail) {
-          getMobileCode({
-            mobile: vm.findPassForm.target
+          getEmailCode_findPass({
+            email: vm.findPassForm.target,
+            username: vm.findPassForm.username
           }).then((res) => {
             if (res.code == 0 && res.data) {
-              vm.findPassForm.verifyCode = res.data
               vm.verifyCodeHandler(vm.findPassForm, 'verifyCodeTime')
             } else {
-              vm.$message.error('验证码发送失败，请重试！')
+              vm.$mg.error('验证码发送失败，请重试！')
             }
           })
         }
@@ -597,19 +606,29 @@ export default {
           startResetPsw()
           function startResetPsw() {
             findPass({
-              mobile: user.target,
+              email: user.target,
               verifyCode: user.verifyCode,
               password: user.password
               //  md5(user.password).toLocaleUpperCase()
             }).then((res) => {
-              if (res.code === 0) {
+              if (res) {
                 if (_this.loading) { return }
-                vm.$message.success('密码修改成功，请登录', 4000), vm.loginShow = true
+                vm.$msg.success('密码修改成功，请登录', 4), vm.loginShow = true
+              } else {
+                vm.loginShow = false
               }
             })
           }
         }
       })
+    },
+    nameTipType() {
+      let userType = this.radio
+      return userType === '1' ? '请输入用户名/手机号/邮箱' : '请输入IAM用户名'
+    },
+    iamNptShow() {
+      let userType = this.radio
+      return userType === '1' ? false : true
     }
   },
   created() {

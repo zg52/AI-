@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="app_container">
     <el-form :model="roles" :inline="true">
       <el-form-item label="角色名称/描述"> <el-input v-model.trim="roles.roleName" placeholder="输入角色名称或者描述搜索"></el-input></el-form-item>
       <el-form-item label="已禁用 / 已启用">
@@ -318,7 +318,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.app-container {
+.app_container {
   .roles-table {
     margin-top: 30px;
   }

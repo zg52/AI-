@@ -1,5 +1,24 @@
+<!--
+ * @Author: zg
+ * @Date: 2021-04-23 11:47:43
+ * @LastEditTime: 2021-07-30 11:23:03
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \inventory-apie:\hjimi\人脸辨识云\html\gitlab\pc\faceCloudWebsite\src\components\Breadcrumb\index.vue
+-->
+<style lang="less" scoped>
+  .hamburger-container {
+    cursor: pointer;
+    &:hover {
+      fill:#1890ff
+    }
+  }
+  
+</style>
 <template>
-  <el-breadcrumb class="app-breadcrumb" separator="/">
+ <div class="flex_align_center">
+   <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
+    <el-breadcrumb class="app-breadcrumb" separator="/">
     <transition-group name="breadcrumb">
       <el-breadcrumb-item v-for="(item,index) in levelList" :key="item.path">
         <span v-if="item.redirect==='noRedirect'||index==levelList.length-1" class="no-redirect">
@@ -9,13 +28,18 @@
       </el-breadcrumb-item>
     </transition-group>
   </el-breadcrumb>
+ </div>
 </template>
 
 <script>
 import { generateTitle } from '@/utils/i18n'
 import pathToRegexp from 'path-to-regexp'
-
+import Hamburger from '@/components/Hamburger'
+import { mapGetters } from 'vuex'
 export default {
+  components: {
+    Hamburger
+  },
   data() {
     return {
       levelList: null
@@ -29,6 +53,11 @@ export default {
       }
       this.getBreadcrumb()
     }
+  },
+   computed: {
+    ...mapGetters([
+      'sidebar',
+    ])
   },
   created() {
     this.getBreadcrumb()
@@ -66,7 +95,10 @@ export default {
         return
       }
       this.$router.push(this.pathCompile(path))
-    }
+    },
+     toggleSideBar() {
+      this.$store.dispatch('app/toggleSideBar')
+    },
   }
 }
 </script>
@@ -78,15 +110,15 @@ export default {
   line-height: 50px;
   margin-left: 8px;
   a {
-    color:#fff
+    color:rgba(0, 0, 0, 0.85)
   }
 
   .no-redirect {
-    color: #c4d4e9;
+    color:rgba(0, 0, 0, 0.45);
     cursor: text;
   }
   ::v-deep .el-breadcrumb__separator {
-    color:#c4d4e9;
+    color:rgba(0, 0, 0, 0.45)
   }
 }
 </style>

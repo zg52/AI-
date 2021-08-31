@@ -1,0 +1,91 @@
+.col_black {
+    color: #000;
+}
+.col_8f {
+    color: #8F8F8F;
+}
+.idcard {
+    padding-left: 20px;
+    em {
+        padding-left: 5px;
+        @extend .col_black;
+    }
+    padding-right: 10px;
+}
+.is_approve {
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+.msg {
+    width: 400px;
+    margin-top: 30px;
+    h4 {
+        text-align: center;
+        font-weight: bold;
+        font-size: 14px;
+         margin-right: 93px;
+    }
+}
+.npt_msg {
+    input {
+        border:none;
+        @extend .col_black;
+        outline: none;
+    }
+    ul {
+        padding-left: 20px;
+    }
+    li {
+        margin: 24px 0;
+        span {
+            @extend .col_8f;
+            width: 102px;
+            display: inline-block;
+            text-align: right;
+        }
+        &::v-deep svg {
+        fill: #1890FF!important;
+   }
+   input {
+       width: auto;
+       padding-left: 5px;
+       padding-right: 5px;
+       transition: all .4s;
+       border-bottom: 1px transparent solid;
+   }
+   span,em {white-space: nowrap;}
+   em{ @extend .col_black;}
+    }
+    p {
+        margin-left: 120px;
+    }
+}
+input:disabled {
+    background: transparent;
+}
+.pointer {
+    color: #1890FF!important;
+    text-align: left!important;
+}
+.edit_pass {
+    margin-left: 109px;
+}
+.fr {
+    width: 400px;
+    text-align: center;
+    margin-top: 93px;
+    h4 {
+        font-weight: bold;margin-left: 112px;margin-bottom: 30px;
+    }
+    em,h4 {
+        @extend .col_black;
+    }
+    li {
+        white-space: nowrap;
+    }
+    .auto_Handle {
+        margin-left: 125px;
+    }
+}

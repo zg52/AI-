@@ -1,0 +1,85 @@
+/**
+ * @description: 全局业务模块样式
+ */
+
+/* -------------------色值---------------------- */
+$theme: #1890FF;
+$danger: #ff4d4f;
+$success: #13ce66;
+$warning: #e6a23c;
+$white: #fff;
+$trans: transparent;
+$black: #000;
+$ccc:#ccc;
+/* 字体 */
+.theme_col {color: $theme;}
+.danger_col {color: $danger;}
+.success_col{color: $success;}
+.warning_col{color: $warning;}
+.col_black{color: $black;}
+
+/* 背景色 */
+.bg_fff {background: $white;}
+.bg_theme {background: $theme;}
+.bg_success {background: $success;}
+.bg_danger {background: $danger;}
+.bg_warning {background: $warning;}
+.bg_trans {background: $trans;}
+.bg_ccc{background: $ccc ;}
+
+
+/* -------------------混合---------------------- */
+
+ /* 元素块 */
+ .box_style { border-radius: 10px; background-color: #fff; padding:24px; }
+
+ /* 元素块小模块 */
+ .box_sm_style { border-radius: 10px; background-color: #fff; padding:24px; margin-bottom: 24px; }
+
+ /* 标题 */
+ .table_tit_txt { color: #000; font-size: 16px; padding-top: 5px;}
+ 
+/* 按钮三点 */
+ .more { position: relative; top: -3px; }
+ 
+/* 表格操作项 */
+ .caozuo {
+     @extend .theme_col;
+     display: flex;
+     justify-content: space-between;
+     padding-right: 10px;
+     span {
+         cursor: pointer;
+     }
+     .more {
+         letter-spacing: 3px;
+         font-weight: bold;
+         position: relative;
+         top:-4px;
+     }
+   }
+.dot {
+  position: relative;
+  top: -1px;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  vertical-align: middle;
+  border-radius: 50%;
+}
+.dot_danger {
+  @extend .bg_danger;
+  @extend .dot;
+
+  }
+.dot_success {
+    @extend .bg_success;
+    @extend .dot;
+  }
+
+/* -------------------边距---------------------- */
+
+/* 内边距 */
+.app_container {
+    padding: 20px;
+  }

@@ -1,16 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2021-05-12 11:11:21
- * @LastEditTime: 2021-05-27 15:51:55
+ * @LastEditTime: 2021-08-04 09:49:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \inventory-apie:\hjimi\人脸辨识云\html\gitlab\pc\faceCloudWebsite\src\views\login\regSuccess.vue
 -->
 <style lang="scss" scoped>
-.back {
-  margin-top: 90px;
-  margin-left: 4%;
-}
+ 
 .regSuccess {
   text-align: center;
   .el-icon-circle-check {
@@ -38,8 +35,8 @@ width: 1000px;
 margin:0 auto;
 background: #fff;
 border-radius: 20px;
-margin-top: 50px;
-padding-top: 30px;
+margin-top: 150px;
+padding-top: 20px;
 padding-bottom: 100px;
 h4 {
   color: #333;
@@ -59,11 +56,12 @@ h4 {
 <template>
     <div>
      <Head />
-      <div class="back"><el-page-header @back="back" content="用户注册"></el-page-header></div>
+     
       <div class="comShow" v-if="isCom ? true : false">
      <Steps :active="active" />
     </div>
       <div class="reg">
+         <div class="back"><a-page-header title="注册成功" @back="goLogin" /></div>
            <h4>{{ isCom ? '信息已提交' : '注册成功' }}</h4>
 
       <div class="regSuccess">

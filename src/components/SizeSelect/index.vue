@@ -1,5 +1,14 @@
+<!--
+ * @Author: long
+ * @Date: 2021-04-23 11:47:43
+ * @LastEditTime: 2021-08-10 10:27:35
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \inventory-apie:\hjimi\人脸辨识云\html\gitlab\pc\faceCloudWebsite\src\components\SizeSelect\index.vue
+-->
 <template>
-  <el-dropdown trigger="click" @command="handleSetSize">
+<div>
+  <!-- <el-dropdown trigger="click" @command="handleSetSize">
     <div>
       <svg-icon class-name="size-icon" icon-class="size" />
     </div>
@@ -9,7 +18,8 @@
           item.label }}
       </el-dropdown-item>
     </el-dropdown-menu>
-  </el-dropdown>
+  </el-dropdown> -->
+</div>
 </template>
 
 <script>

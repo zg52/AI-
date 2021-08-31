@@ -1,0 +1,27 @@
+/*
+ * @Author: long
+ * @Date: 2021-08-06 10:52:49
+ * @LastEditTime: 2021-08-26 15:04:47
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \inventory-apie:\hjimi\人脸辨识云\html\gitlab\pc\faceCloudWebsite\src\styles\antd.scss
+ */
+
+//  按钮
+.ant-btn {
+    border-radius: 2px!important;
+}
+
+// 表单校验提示
+.has-error .ant-form-explain {
+    font-size: 12px!important;
+}
+
+// 表单域
+.ant-form-item  {margin-bottom: 13px!important;}
+.ant-form-item-with-help {margin-bottom: 0!important;}
+.ant-form-explain, .ant-form-extra {min-height: 18px!important;}
+
+// model框
+
+.ant-modal-title {font-weight: bold;}

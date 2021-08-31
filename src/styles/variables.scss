@@ -14,17 +14,15 @@ $panGreen: #30B08F;
 // sidebar
 $menuText:#000;
 $menuActiveText:#1890ff;
-$subMenuActiveText:#1890ff; // https://github.com/ElemeFE/element/issues/12951
+$subMenuActiveText:#1890ff;
 
 $menuBg:#fff;
-$menuHover:#e6f7ff;
+$menuHover: transparent;
 
 $subMenuBg:#fff;
-$subMenuHover:#e6f7ff;
+$subMenuHover:transparent;
 $sideBarWidth: 200px;
 
-// the :export directive is the magic sauce for webpack
-// https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
 :export {
   menuText: $menuText;
   menuActiveText: $menuActiveText;

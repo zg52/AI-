@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-01-07 18:28:14
- * @LastEditTime: 2021-05-24 11:17:44
+ * @LastEditTime: 2021-07-29 10:02:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \inventory-apie:\hjimi\人脸辨识云\html\face-recognition-access\src\layout\index.vue
@@ -36,14 +36,23 @@
     top: 0;
     right: 0;
     z-index: 9;
-    width: calc(100% - #{$sideBarWidth});
+    // width: calc(100% - #{$sideBarWidth});
+    width: 100%;
     transition: width 0.28s;
+  }
+  .breadcrumb {
+    width: calc(100% - #{$sideBarWidth});
+    position: fixed;
+    right: 0;
   }
 
   .hideSidebar .fixed-header {
-    width: calc(100% - 54px)
+    // width: calc(100% - 54px);
+    width: 100%;
   }
-
+  .hideSidebar .breadcrumb {
+     width: calc(100% - 54px);
+   }
   .mobile .fixed-header {
     width: 100%;
   }
@@ -86,17 +95,26 @@
     }
   }
 }
+.breadcrumb {
+  width: 100%;
+height: 70px;
+background: #ffffff;
+box-shadow: 0 1px 3px 0 rgb(0 0 0 / 12%), 0 0 3px 0 rgb(0 0 0 / 4%);
+}
 </style>
  
-<template>
+<template> 
   <div :class="classObj" class="app-wrapper">
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
     <sidebar class="sidebar-container" />
-    <div :class="{hasTagsView:needTagsView}" class="main-container">
       <div :class="{'fixed-header':fixedHeader}">
         <navbar />
-        <tags-view v-if="needTagsView" />
+        <!-- <tags-view v-if="needTagsView" /> -->
+         <div class="breadcrumb">
+           <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
+         </div>
       </div>
+    <div :class="{hasTagsView:needTagsView}" class="main-container">
       <app-main />
       <right-panel v-if="showSettings">
         <settings />
@@ -108,6 +126,7 @@
 
 <script>
 import RightPanel from '@/components/RightPanel'
+import Breadcrumb from '@/components/Breadcrumb'
 import { AppMain, Navbar, Settings, Sidebar, TagsView } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
 import { imgUrl } from '@/api/public'
@@ -131,7 +150,8 @@ export default {
     RightPanel,
     Settings,
     Sidebar,
-    TagsView
+    TagsView,
+    Breadcrumb
   },
   mixins: [ResizeMixin],
   computed: {
@@ -184,7 +204,6 @@ export default {
         console.log('断开连接',e)
       },
   },
-
   created() {
     vm = this
     },

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-07 18:28:14
- * @LastEditTime: 2021-05-24 11:04:13
+ * @LastEditTime: 2021-07-29 14:37:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \inventory-apie:\hjimi\人脸辨识云\html\face-recognition-access\src\filters\index.js
@@ -89,5 +89,8 @@ export function filterDate(string) {
 
 
 
-// 业务数据过滤
+/**
+ * @description: 业务数据过滤
+ * @param {*} string
+ */
 

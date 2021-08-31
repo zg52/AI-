@@ -1,19 +1,11 @@
-<!--
- * @Author: your name
- * @Date: 2021-05-08 15:49:00
- * @LastEditTime: 2021-05-27 15:51:06
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \inventory-apie:\hjimi\人脸辨识云\html\gitee\pc\faceCloudWebsite\src\views\login\reg.vue
--->
 <style lang="scss" scoped>
 .reg {
 width: 1000px;
 margin:0 auto;
 background: #fff;
 border-radius: 20px;
-margin-top: 50px;
-padding-top: 30px;
+
+padding-top: 18px;
 padding-bottom: 20px;
 h4 {
   color: #333;
@@ -21,7 +13,6 @@ h4 {
   display: block;
   text-align: center;
   padding-bottom: 40px;
-  padding-top: 40px;
 }
 }
 .form {width: 400px;
@@ -35,26 +26,25 @@ h4 {
 }
 .el-icon-info {
     position: relative;
-    left: 5px;
+    left: 15px;
     top:10px;
 }
 }
 .authCode {
-  width: 160px;
+  width: 150px;
   ::v-deep.el-input__inner {
-    width: 160px;
+    width: 150px;
   }
 }
 .authCode_btn {margin-left: 5px;}
 
-.back {
-  margin-top: 90px;
-  margin-left: 4%;
-}
+ .steps {
+   height: 100px;
+ }
 .comShow {
   width: 800px;
   margin:0 auto;
-  margin-top: 20px;
+  margin-top: 7%;
 }
 .agreeChecked {
   padding-top:10px;
@@ -110,28 +100,37 @@ position: absolute;
     background-size: contain;
     position: relative;
   }
+ 
 </style>
 <template>
-<div>
-  <Head />
-    <div class="back"><el-page-header @back="goLogin" content="用户注册"></el-page-header></div>
-    <div class="comShow" v-show="form.type === 'COMPANY' ? true : false">
-   <Steps :active="active" />
-    </div>
+  <div>
+    <Head />
+
+  <div class="steps">
+        <div class="comShow" v-show="form.type === 'COMPANY' ? true : false">
+     <Steps :active="active" />
+      </div>
+  </div>
     <div class="reg">
+          <div class="back">
+      <a-page-header title="注册" @back="goLogin" />
+      </div>
         <h4 v-text="regTit"></h4>
-      <el-form class="form" ref="form" :model="form" :rules="rules" label-width="100px" label-position="right" v-show="regShow">
+      <el-form class="form" ref="form" :model="form" :rules="rules" label-width="110px" label-position="right" v-show="regShow">
            <el-form-item label="用户类型："><el-radio-group v-model.trim="form.type"> <el-radio label="PERSON">个人</el-radio><el-radio label="COMPANY">公司</el-radio></el-radio-group></el-form-item>
            <el-form-item label="用户名：" prop="username"><el-input v-model.trim="form.username" placeholder="4~20位" minlength="4"  maxlength="20" clearable></el-input></el-form-item>
            <el-form-item label="手机号：" prop="mobile"><el-input v-model.trim="form.mobile" placeholder="请输入手机号" clearable></el-input></el-form-item>
-           <el-form-item label="验证码：" prop="verifyCode"><el-input v-model.trim="form.verifyCode" placeholder="请输入验证码"  class="authCode" clearable></el-input>
+           <el-form-item label="邮箱：" prop="email"><el-input type="email" v-model.trim="form.email" placeholder="请输入邮箱" clearable></el-input></el-form-item>
+           <el-form-item label="邮箱验证码：" prop="verifyCode"><el-input v-model.trim="form.verifyCode" placeholder="请输入验证码"  class="authCode" clearable></el-input>
            <el-button type="primary" class="authCode_btn" :disabled="authCodeBtnStatus" @click="getauthCodeHandler('form')">{{ authCodeTxt }}</el-button>
            </el-form-item>
-           <el-form-item label="邮箱：" prop="email"><el-input type="email" v-model.trim="form.email" placeholder="请输入邮箱" clearable></el-input></el-form-item>
            <el-form-item label="密码：" prop="password" class="pass"><el-input type="password" v-model.trim="form.password" placeholder="12~18位数字、字母和符号组合" maxlength="18" clearable :show-password="true"></el-input>
-             <el-tooltip class="item" effect="light" placement="top"> <div slot="content">设置的密码应为字母、数字和符号（仅限 ASCII 标准字符）<br/>组合，长度在12~18字符之间</div> <i class="el-icon-info"></i> </el-tooltip>
+             <el-tooltip class="item" effect="light" placement="top"> <div slot="content" v-html="passTip"></div> <i class="el-icon-info"></i> </el-tooltip>
            </el-form-item>
-           <el-form-item label="确认密码：" prop="checkPsw"><el-input type="password" v-model.trim="form.checkPsw" placeholder="请再次输入密码" clearable :show-password="true"></el-input></el-form-item><br>
+           <el-form-item label="确认密码：" prop="checkPsw"><el-input type="password" v-model.trim="form.checkPsw" placeholder="请再次输入密码" clearable :show-password="true"></el-input></el-form-item>
+           <el-form-item label="专属域名：" prop="domain" class="pass"><el-input v-model.trim="form.domain" placeholder="5~12位数字和字母组合" maxlength="12" clearable></el-input>
+             <el-tooltip class="item" effect="light" placement="top"> <div slot="content">IAM用户登录时需要输入，用以区分所属根用户</div> <i class="el-icon-info"></i> </el-tooltip>
+           </el-form-item><br>
            <el-form-item><el-button type="primary" @click="submitHandle('form')" v-show="form.type === 'PERSON' ? true : false">确认注册</el-button>
            <el-button plain @click="resetForm('form')"><i class="el-icon-refresh"></i> 重 置</el-button>
            <el-button plain @click="next('form')" v-show="form.type === 'COMPANY' ? true : false">下一步</el-button>
@@ -139,8 +138,9 @@ position: absolute;
            </el-form-item>
       </el-form>
 
-      <el-form class="form" :model="formFirm" :rules="firmRules" ref="firmRules" label-width="155px" label-position="right" v-show="!regShow ? true : false">
-         <el-form-item label="公司名称：" prop="companyName"><el-input v-model.trim="formFirm.companyName" placeholder="请输入公司名称" clearable></el-input></el-form-item>
+<!-- 公司注册 -->
+       <el-form class="form" :model="formFirm" :rules="firmRules" ref="firmRules" label-width="155px" label-position="right" v-show="!regShow ? true : false">
+         <el-form-item label="公司名称：" prop="companyName"><el-input v-model.trim="formFirm.companyName" maxlength="20" placeholder="请输入公司名称" clearable></el-input></el-form-item>
          <el-form-item label="统一社会信用代码：" prop="uscc"><el-input v-model.trim="formFirm.uscc" placeholder="请输入统一社会信用代码" clearable></el-input></el-form-item>
          <el-form-item label="公司营业执照照片：" prop="file" :rules="[{required : true, message: '请上传公司营业执照照片'}]">
             <el-upload
@@ -165,9 +165,9 @@ position: absolute;
         <el-button plain @click="prev">上一步</el-button>
         </el-form-item>
       </el-form>
-      
     </div>
-    <!-- 服务条款 -->
+    
+<!-- 服务条款 -->
   <el-dialog
     title="用户服务条款 / 法律声明 / 隐私政策"
     :visible.sync="dialogVisible"
@@ -182,17 +182,20 @@ position: absolute;
       <el-button type="primary" @click="agreeChecked = true, dialogVisible = false">确 定</el-button>
     </div>
    </el-dialog>
+   
     </div>
 </template>
 
 <script>
-import { validPhone, validatePass, validateChinese } from '@/utils/validate.js'
-import { reg, isUser, getMobileCode } from '@/api/user'
-import {proxyUrl_1 } from '@/api/public'
+import { validPhone, validatePass, validateChinese, validateCreditCode, validateNames } from '@/utils/validate.js'
+import { regPerson, regCom, isUser, isPhone, getMobileCode, getEmailCode_reg } from '@/api/user'
+import { proxyUrl_1 } from '@/api/public'
 import privacy from '@/views/privacy/privacy'
 import Head from './components/Head'
 import Steps from './components/Steps'
-import md5 from 'js-md5'
+import { passTip } from '@/utils/txtTip'
+import Mock from '@/../mock/proxyUrl'
+// import md5 from 'js-md5'
 let vm
 
 export default {
@@ -207,16 +210,12 @@ export default {
       value === ""
         ? callback(new Error("请输入用户名"))
         : validateChinese(value)
-        ? callback(new Error("用户名不能出现符号"))
+        ? callback(new Error("用户名不能出现符号或汉字"))
         : this.isUserHandler().then((res) => {
             res
               ? callback(
                   new Error(" "),
-                  this.$message({
-                    message: "用户名或手机号已存在",
-                    type: "warning",
-                    duration: 3 * 1000,
-                  })
+                  this.$msg.error('该用户名已存在')
                 )
               : callback()
           })
@@ -225,19 +224,23 @@ export default {
         if (!validPhone(value)) {
           callback(new Error("手机号格式错误"))
         } else {
-          this.isUserHandler().then((res) => {
+          this.isPhoneHandler().then((res) => {
             res
               ? callback(
                   new Error(" "),
-                  this.$message({
-                    message: "用户名或手机号已存在",
-                    type: "warning",
-                    duration: 3 * 1000,
-                  })
+                  this.$msg.error('该手机号已存在')
                 )
               : callback()
           })
         }
+       },
+      validateCredit = (rule, value, callback) => {
+       value === ''
+        ? callback(new Error("请输入社会统一信用代码"))
+        : !validateCreditCode(value)
+        ? callback(new Error("信用代码格式不正确"))
+        : String
+          callback()
        },
     
  // 注册判断邮箱是否可用
@@ -265,14 +268,22 @@ export default {
         : callback()
       callback()
     },
-     validatePsw1_regist = (rule, value, callback) => {
+    validatePsw1_regist = (rule, value, callback) => {
       value === ""
         ? callback(new Error("请再次输入密码"))
         : value !== this.form.password
         ? callback(new Error("两次输入密码不一致!"))
         : callback()
       callback()
+    },
+    validateDomain = (rule, value, callback) => {
+      value === ""
+        ? callback(new Error("请输入专属域名"))
+        : !validateNames(value, 5, 12)
+        ? callback(new Error("5~12位数字和字母组合"))
+        : callback()
     }
+    
     function notNull(notNullName) { return [{required: true, message: `请输入${ notNullName }`, trigger: "blur" }] }
 
      return  {
@@ -288,6 +299,7 @@ export default {
        imageUrl: '',
        imgUploading: false,
        save_loading: false,
+       passTip: passTip(),
         
        form: {
             type: 'PERSON',
@@ -295,8 +307,9 @@ export default {
             mobile: '15652970369',
             verifyCode: null,
             email: 'longarui@163.com',
-            password: '12345qwe.',
-            checkPsw: '12345qwe.'
+            password: '12345qweqwe.',
+            checkPsw: '12345qweqwe.',
+            domain: 'qwer123'
             },
             rules: {
               username: [notNull('用户名')[0], { validator: validateName1, trigger: "blur"  }],
@@ -309,19 +322,19 @@ export default {
                       message: "请输入正确的邮箱地址",
                       trigger: ["blur", "change"],
                     },
-                    // { validator: validate_registerEmail, trigger: "blur" },
                   ],
               password: [{required: true, validator: validatePsw_regist, trigger: "blur" }],
-              checkPsw: [{required: true,  validator: validatePsw1_regist, trigger: "blur" }]
+              checkPsw: [{required: true,  validator: validatePsw1_regist, trigger: "blur" }],
+              domain: [{required: true, validator: validateDomain, trigger: "blur"  }],
               },
             formFirm: {
               companyName: null,
-              uscc: null,
+              uscc: 913101175821220588,
               file: null
             },
              firmRules: {
               companyName: notNull('公司名称'),
-              uscc: notNull('统一社会信用代码')
+              uscc:  { required: true, validator: validateCredit, trigger: 'blur' }
               },
             authCodeBtnStatus: false,
             authCode_disabledTxt: "后重新获取",
@@ -332,7 +345,13 @@ export default {
   methods: {
     isUserHandler() {
      let form = this.form
-      return isUser(form.username, form.mobile).then((res) => {
+      return isUser(form.username).then((res) => {
+        return res.data ? true : false
+      })
+    },
+    isPhoneHandler() {
+     let form = this.form
+      return isPhone(form.mobile).then((res) => {
         return res.data ? true : false
       })
     },
@@ -345,8 +364,8 @@ export default {
              let params = Object.assign({}, this.form)
             //  params.password =  md5(params.password).toUpperCase()
              delete params.checkPsw
-             reg(params).then(res => {
-               if(res.code === 0) {
+             regPerson(params).then(res => {
+               if(res) {
                  this.$router.push({
                    path: './regSuccess',
                    query: {
@@ -360,7 +379,7 @@ export default {
               //  }
            })
            } else {
-             this.$message('请阅读并同意《服务条款》《法律声明》《隐私政策》', 4000)
+             this.$msg.warning('请阅读并同意《服务条款》《法律声明》《隐私政策》', 4)
            }
       }})
     },
@@ -376,8 +395,8 @@ export default {
            let formData = new FormData()
           for(let item in params) { formData.append(item, params[item]) }
 
-          reg(formData).then((res) => {
-                if(res.code === 0 && res.data) {
+          regCom(formData).then((res) => {
+                if(res && res.data) {
                    vm.save_loading = false
                    vm.resetForms()
                    this.$router.push({
@@ -391,7 +410,7 @@ export default {
                   }
                 },(err) => {
                    vm.save_loading = false
-                   vm.$message.error('注册失败，请重试！')
+                   vm.$msg.error('注册失败，请重试！')
                })
           
       }})
@@ -400,14 +419,21 @@ export default {
       let timeDecrease = this.authCodeTime
       this.$refs[el].validateField("username", (validName) => {
          this.$refs[el].validateField("mobile", (validPhone) => {
+           this.$refs[el].validateField("email", (validPhone) => {
            if (!validPhone && !validName) {
-              getMobileCode({mobile: vm.form.mobile}).then((res) => {
-                   if (res.code == 0) {
+              // getMobileCode({mobile: vm.form.mobile}).then((res) => {
+              //      if (res.code == 0) {
+              //        authCodeHandler()
+              //        this.form.verifyCode = res?.data
+              //      } 
+              //    })
+               getEmailCode_reg({email: vm.form.email}).then((res) => {
+                   if (res) {
                      authCodeHandler()
-                     this.form.verifyCode = res?.data
                    } 
                  })
            }
+         })
          })
       })
       function authCodeHandler() {
@@ -426,7 +452,7 @@ export default {
         new Promise((resolved) => {
           if (timeDecrease != 58) resolved()
         }).then(() => {
-            vm.$message.success('验证码已发送至您的手机，请注意查收', 5000)
+            vm.$msg.success('验证码已发送至您的邮箱，请注意查收', 5)
         })
       }
     },
@@ -455,10 +481,7 @@ export default {
            }, 700)
       },
      imgError(err, file, fileList) {
-       this.$message({
-                message: '上传失败，请重试',
-                 type: "error"
-            })
+        this.$msg.error('上传失败，请重试')
      },
     goLogin() {
       this.$router.go(-1)
@@ -478,7 +501,7 @@ export default {
              this.regShow = false
              if (this.active++ > 2) this.active = 0
            } else {
-             this.$message('请阅读并同意《服务条款》《法律声明》《隐私政策》', 4000)
+             this.$msg.warning('请阅读并同意《服务条款》《法律声明》《隐私政策》', 4)
            }
       }})
       },
@@ -494,5 +517,8 @@ export default {
     created() {
         vm = this
     },
+    mounted() {
+
+    }
 }
 </script>

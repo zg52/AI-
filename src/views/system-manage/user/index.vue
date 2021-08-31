@@ -1,13 +1,13 @@
 <!--
  * @Author: your name
  * @Date: 2021-01-10 18:10:42
- * @LastEditTime: 2021-04-06 10:02:35
+ * @LastEditTime: 2021-07-29 18:21:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \tracking-Pluse:\hjimi\人脸\html\face-recognition-useCase\src\views\system-manage\user\index.vue
 -->
 <template>
-    <div class="app-container">
+    <div class="app_container">
       <el-form :model="pagingQuery" :inline="true">
       <el-form-item label="用户名"> <el-input v-model.trim="pagingQuery.name" placeholder="输入用户名搜索"></el-input> </el-form-item>
       <el-form-item label="状态">
@@ -305,7 +305,7 @@ export default {
             this.handleDelete(this.multipleSelection[i]);
           }
         }).catch(() => {
-          this.$message.success.info({message: '已取消删除'})
+          this.$message.info({message: '已取消删除'})
           this.$refs.multipleTable.clearSelection()
           })
       } else {

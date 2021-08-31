@@ -1,20 +1,21 @@
 /*
- * @Author: your name
- * @Date: 2021-01-07 18:28:14
- * @LastEditTime: 2021-05-27 11:18:34
+ * @Author: long
+ * @Date: 2021-04-23 11:47:43
+ * @LastEditTime: 2021-08-27 17:47:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: \tracking-Pluse:\hjimi\人脸\html\face-recognition-useCase\src\utils\request.js
+ * @FilePath: \inventory-apie:\hjimi\人脸辨识云\html\gitlab\pc\faceCloudWebsite\src\utils\request.js
  */
+
 import axios from 'axios'
-import { MessageBox, Message } from 'element-ui'
+import { message } from 'ant-design-vue'
 import store from '@/store'
 import { getToken, removeToken } from '@/utils/auth'
 import qs from 'qs'
 import router from "../router"
 
 let hash = window.location.hash
-const service = axios.create({
+const SERVICE = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
   withCredentials: true,
   headers: {
@@ -23,19 +24,23 @@ const service = axios.create({
   timeout: 60000
 })
 
-// request interceptor
-service.interceptors.request.use(
+SERVICE.interceptors.request.use(
   config => {
-    
-    const conType = config.headers.post['Content-Type']
+    const CONTYPE = config.headers.post['Content-Type']
     if (store.getters.token) {
     config.headers['Authorization'] = getToken()
+    // config.headers['token'] = getToken()
     }
 
-// 凡是post发送的请求一律序列化为formdata格式
+/**
+ 凡是post发送的请求一律序列化为formdata格式 
+ 规避 json数据类型和multipart复合数据类型（multipart/form-data; boundary=----WebKitFormBoundaryzH3fLs688r84bFB9）
+ */
     if (config.data !== undefined && config.data !== null && !config.data.append) {
-      if (conType && (conType.indexOf('application/json') && conType.indexOf('multipart/form-data')) === -1) {
-        config.data = qs.stringify(config.data)
+      if (CONTYPE && CONTYPE.indexOf('application/json') === -1 && CONTYPE.indexOf('multipart/form-data') === -1) {
+        if(config.headers['Content-Type'].indexOf('application/json') === -1) {
+          config.data = qs.stringify(config.data)
+        } 
       }
     }
     return config
@@ -45,18 +50,20 @@ service.interceptors.request.use(
   }
 )
 
-service.interceptors.response.use(
+SERVICE.interceptors.response.use(
   response => {
     const {code, msg } = response.data
     
     if(code === 10009) {
       if(!hash.includes('/login')) removeToken(), router.go(0), router.push({path:'/login'})
     }
+
+// 和后台约定 code === 0 为成功标识
     if(code !== 0) { 
-      Message.error(msg || '系统异常', 4000)
+      message.error(msg || '系统异常')
+    } else {
+      return response.data
     }
-    console.log(response.data)
-    return response.data
   },
   error => {
     
@@ -67,37 +74,25 @@ service.interceptors.response.use(
         const errRes = error.response
         switch (errRes.status) {
           case 400:
-            Message({
-              message: "参数有误（400）,请重试",
-              type: "warning",
-              duration: 5 * 1000
-            })
+            message.warning('参数有误（400）,请重试')
             break
           case 404:
-            Message({
-              message: `请求地址：${ errRes.data.path } 不存在（404）`,
-              type: "error",
-              duration: 5 * 1000
-            })
+            message.error( `请求地址：${ errRes.data.path } 不存在（404）`)
             break
           case 401:
-            router.push({path:'/login'}),  Message('请登录', 5000)
+            router.push({path:'/login'}),  message.info('请登录')
             break
           case 500:
-            Message({
-              message: `请求地址：${ errRes.data.path } 服务器异常（500）`,
-              type: "error",
-              duration: 10 * 1000
-            })
+            message.error( `请求地址：${ errRes.data.path } 服务器异常（500）`)
             break
-            default: Message.error(error.message, 5000)
+            default: message.error(error.message)
         }
       }
       if (error.toString().indexOf('Error: timeout') !== -1) {  // 请求超时提示
-        Message.error('请求超时，请刷新重试！', 60000)
+        message.error('请求超时，请刷新重试！')
       }
     return Promise.reject(error)
   }
 )
 
-export default service
+export default SERVICE

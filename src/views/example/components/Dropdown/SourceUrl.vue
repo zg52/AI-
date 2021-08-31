@@ -1,10 +1,18 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-23 11:47:43
+ * @LastEditTime: 2021-07-30 13:59:17
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \inventory-apie:\hjimi\人脸辨识云\html\gitlab\pc\faceCloudWebsite\src\views\example\components\Dropdown\SourceUrl.vue
+-->
 <template>
   <el-dropdown :show-timeout="100" trigger="click">
     <el-button plain>
       Link
       <i class="el-icon-caret-bottom el-icon--right" />
     </el-button>
-    <el-dropdown-menu slot="dropdown" class="no-padding no-border" style="width:400px">
+    <el-dropdown-menu slot="dropdown" class="p0 no-border" style="width:400px">
       <el-form-item label-width="0px" style="margin-bottom: 0px" prop="source_uri">
         <el-input v-model="source_uri" placeholder="Please enter the content">
           <template slot="prepend">

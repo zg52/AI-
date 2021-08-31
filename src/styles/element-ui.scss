@@ -34,6 +34,7 @@
     min-width: 60px;
   }
 }
+.el-button {border-radius: 2px!important;}
 
 .status-col {
   .cell {
@@ -92,7 +93,7 @@
   margin-bottom: 16px;
 }
 .el-dialog__title {
-  color: #409EFF;
+  // color: #409EFF;
 }
 .el-table__empty-text {
   line-height: 18px!important;
@@ -114,6 +115,4 @@
 .el-table th {height: 57px;}
 .el-table__body .el-table__row td {padding: 16px 0;}
 .el-table td {border-bottom:1px #f3f3f3 solid;}
-.el-dropdown-menu__item {
-  // color: #1890ff!important;
-}
+.el-popconfirm__main {padding-bottom: 10px;}

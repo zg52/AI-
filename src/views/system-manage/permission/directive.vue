@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="app_container">
     <switch-roles @change="handleRolesChange" />
     <div :key="key" style="margin-top:30px;">
       <div>
@@ -90,7 +90,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.app-container {
+.app_container {
   ::v-deep .permission-alert {
     width: 320px;
     margin-top: 15px;

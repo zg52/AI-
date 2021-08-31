@@ -1,6 +1,6 @@
 export default {
   route: {
-    dashboard: '首页',
+    dashboard: '总览',
     documentation: '文档',
     guide: '引导页',
     permission: '权限测试页',
@@ -65,7 +65,7 @@ export default {
     profile: '个人中心'
   },
   navbar: {
-    dashboard: '首页',
+    dashboard: '总览',
     github: '项目地址',
     logOut: '退出登录',
     profile: '个人中心',

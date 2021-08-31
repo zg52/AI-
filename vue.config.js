@@ -15,11 +15,12 @@ module.exports = {
   outputDir: 'dist',
   assetsDir: 'static',
   // lintOnSave: process.env.NODE_ENV === 'development',
-  productionSourceMap: false,
+  productionSourceMap: false, // 去掉map文件，减少打包体积
   devServer: {
     proxy: {
       "/_api": {
-        target: "http://192.168.10.119:32278/",
+           target: 'http://192.168.10.122:28080/',  // 网关代理地址
+        // target: "http://192.168.10.119:32278/",
         // target: "http://192.168.10.148:8082/",
         pathRewrite: { "^/_api": "" },
         changeOrigin: true,
@@ -35,8 +36,6 @@ module.exports = {
     // before: require('./mock/mock-server.js')
   },
   configureWebpack: {
-    // provide the app's title in webpack's name field, so that
-    // it can be accessed in index.html to inject the correct title.
     name: name,
     resolve: {
       alias: {
@@ -44,23 +43,26 @@ module.exports = {
       }
     }
   },
+
+// 解决 antd .bezierEasingMixin();
+  css: {
+    loaderOptions: {
+      less: {
+        javascriptEnabled: true,
+      }
+    }
+  },
   chainWebpack(config) {
-    // it can improve the speed of the first screen, it is recommended to turn on preload
-    // it can improve the speed of the first screen, it is recommended to turn on preload
     config.plugin('preload').tap(() => [
       {
         rel: 'preload',
-        // to ignore runtime.js
-        // https://github.com/vuejs/vue-cli/blob/dev/packages/@vue/cli-service/lib/config/app.js#L171
         fileBlacklist: [/\.map$/, /hot-update\.js$/, /runtime\..*\.js$/],
         include: 'initial'
       }
     ])
 
-    // when there are many pages, it will cause too many meaningless requests
     config.plugins.delete('prefetch')
 
-    // set svg-sprite-loader
     config.module
       .rule('svg')
       .exclude.add(resolve('src/icons'))
@@ -116,5 +118,9 @@ module.exports = {
           config.optimization.runtimeChunk('single')
         }
       )
-  }
+  },
+
+// 使用运行编译的 Runtime 版本：
+ //Solution For Issue:You are using the runtime-only build of Vue where the template compiler is not available. Either pre-compile the templates into render functions, or use the compiler-included build.
+   runtimeCompiler: true
 }

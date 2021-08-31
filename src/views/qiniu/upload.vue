@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-04-23 11:47:44
+ * @LastEditTime: 2021-07-06 17:38:16
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \inventory-apie:\hjimi\人脸辨识云\html\gitlab\pc\faceCloudWebsite\src\views\qiniu\upload.vue
+-->
 <template>
   <el-upload :data="dataObj" :multiple="true" :before-upload="beforeUpload" action="https://upload.qbox.me" drag>
     <i class="el-icon-upload" />
@@ -31,7 +39,6 @@ export default {
           _self._data.dataObj.key = key
           resolve(true)
         }).catch(err => {
-          console.log(err)
           reject(false)
         })
       })

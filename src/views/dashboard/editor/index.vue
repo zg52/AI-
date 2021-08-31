@@ -1,14 +1,14 @@
 <!--
- * @Author: your name
+ * @Author: long
  * @Date: 2021-01-07 18:28:14
- * @LastEditTime: 2021-01-10 10:33:05
- * @LastEditors: your name
+ * @LastEditTime: 2021-08-04 15:11:35
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \tracking-Pluse:\hjimi\人脸\html\face-recognition-useCase\src\views\dashboard\editor\index.vue
 -->
 <template>
   <div class="dashboard-editor-container">
-    <div class=" clearfix">
+    <div class="clearfix ">
       <pan-thumb :image="avatar" style="float: left">
         Your roles:
         <span v-for="item in roles" :key="item" class="pan-info-roles">{{ item }}</span>

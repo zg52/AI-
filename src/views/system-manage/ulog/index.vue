@@ -10,7 +10,7 @@
 
 </style>
 <template>
-  <div class="app-container">
+  <div class="app_container">
     <el-form :model="pagingQuery" :inline="true">
     <el-form-item  label="操作人"><el-input v-model="pagingQuery.name" class="w100" clearable></el-input></el-form-item>
      <el-form-item label="选择设备名称">

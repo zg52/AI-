@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-01-07 18:28:14
- * @LastEditTime: 2021-01-10 14:09:08
+ * @LastEditTime: 2021-07-29 10:38:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \tracking-Pluse:\hjimi\人脸\html\face-recognition-useCase\src\layout\components\AppMain.vue
@@ -31,10 +31,11 @@
   .app-main {
     /* 84 = navbar + tags-view = 50 + 34 */
     min-height: calc(100vh - 84px);
+    padding-top: 120px
   }
 
   .fixed-header+.app-main {
-    padding-top: 84px;
+    padding-top: 137px;
   }
 }
 </style>
